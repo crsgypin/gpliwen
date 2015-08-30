@@ -70,11 +70,13 @@ var vAttributeField = function(html){
 			if(id){
 				$(element).attr('id',id.replace('_'+self.index+'_', '_'+newIndex+'_' ) );
 			};
-			var value = $(element).attr('value');
-			if(value){
-				$(element).attr('value',"")
-			};
-			$(element).val("");
+
+			if ($(element).prop('tagName').toLowerCase() != 'option'){
+				if($(element).attr('value')){
+					$(element).attr('value',"")
+				};
+				$(element).val("");
+			}
 		})
 		return newObject;
 	}
