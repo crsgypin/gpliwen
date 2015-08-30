@@ -1,0 +1,22 @@
+
+<div class="account-record-index">
+	
+	<table>
+		<tr>
+			<td> 日期 </td>
+			<td> 交易地點 </td>
+			<td> 交易金額 </td>
+			<td> 交易類別 </td>
+		</tr>
+		<% @account_records.each do |account_record| %>
+			<tr>
+				<td> <%= account_record.account_date %> </td>
+				<td> <%= account_record.location %> </td>	
+				<td> <%= account_record.total_amount %> </td>
+				<td> <%= account_record.total_first_category %> </td>
+			</tr>
+		<% end %>
+			
+	</table>
+</div>
+

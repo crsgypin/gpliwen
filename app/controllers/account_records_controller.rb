@@ -1,7 +1,7 @@
 class AccountRecordsController < ApplicationController
 
 	def index
-		
+		@account_records = AccountRecord.includes(:account_values)
 	end
 
 	def new
