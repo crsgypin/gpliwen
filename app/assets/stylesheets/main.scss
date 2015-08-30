@@ -1,0 +1,16 @@
+
+
+
+
+.total-box{
+	width:50%;
+	margin-left: 25%;
+}
+
+@media screen and (max-device-width: 780px){
+	.total-box{
+		width:100%;
+		margin:0;
+	}
+}
+

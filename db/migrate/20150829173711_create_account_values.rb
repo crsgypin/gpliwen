@@ -2,7 +2,7 @@ class CreateAccountValues < ActiveRecord::Migration
   def change
     create_table :account_values do |t|
     	t.integer :account_record_id, :index=>true
-    	t.integer :cost
+    	t.integer :amount
     	t.string :description
     	t.integer	:first_category_id, :index=>true
     	t.integer :second_category_id, :index=>true

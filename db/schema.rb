@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150830014811) do
 
   create_table "account_values", force: :cascade do |t|
     t.integer  "account_record_id"
-    t.integer  "cost"
+    t.integer  "amount"
     t.string   "description"
     t.integer  "first_category_id"
     t.integer  "second_category_id"
