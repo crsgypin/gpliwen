@@ -1,19 +1,85 @@
 
 
+
 .deal-record-new{
 
-	.deal-items-attributes{
+	.submit{
+		input{
+			width: 96%;
+	    display: block;
+	    height: 120px;
+	    margin: 0 auto;
+	    background-color: lightgreen;
+	    border-radius: 25px;
+	    font-size: 1.5em;
+	    font-family: serif;	    
+		}
+	}
+
+	.record-field{
+		border: 2px solid green;
+    width: 95%;
+    margin: 20px auto;
+    border-radius: 10px;
 
 		table{
-			table-layout: fixed;
+			width: 90%;
+	    table-layout: fixed;
+	    margin: 30px auto;
 
-			tr{height: 30px;}
+			tr{
+				height: 3em;
+			}
+
 			td:nth-child(1){width:30%;}
 			td:nth-child(2){width:70%;}
+		
+			select{
+				border-radius: 0px;
+				width: 90%;
+				margin: 0 auto;
+				background-color: lightblue;
+			}
+
+			input[type=text]{
+				width: 90%;
+				margin: 0 auto;
+				background-color: lightblue;
+			}
+
 		}
+	}
+
+	.deal-items-attributes{
+    margin: 20px auto;
+    width: 95%;
+    border: 2px solid lightgreen;
+    border-radius: 20px;
 
 		.attribute-field{
-			margin: 20px 0 0 0;
+			margin: 20px 4%;
+
+			.deal-item-table{
+				table-layout: fixed;
+
+				tr{height: 3em;}
+				td:nth-child(1){width:30%;}
+				td:nth-child(2){width:70%;}
+
+				select{
+					border-radius: 0px;
+					width: 90%;
+					margin: 0 auto;
+					background-color: lightblue;
+				}
+
+				input[type=text]{
+					width: 90%;
+					margin: 0 auto;
+					background-color: lightblue;
+				}
+
+			}
 		}
 
 		select{

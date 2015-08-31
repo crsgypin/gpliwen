@@ -1,16 +1,18 @@
 
 
-
-
 .total-box{
+	font-size: 3em;
+	width:100%;
+	margin:0;
+}
+
+
+
+@media screen and (min-device-width: 780px){
+.total-box{
+	font-size:1em;
 	width:50%;
 	margin-left: 25%;
 }
-
-@media screen and (max-device-width: 780px){
-	.total-box{
-		width:100%;
-		margin:0;
-	}
 }
 
