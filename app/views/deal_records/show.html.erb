@@ -1,77 +1,60 @@
 
 
-
-
 <div class="deal-record-show">
 	<div class="record-field">
 		<table>
 			<tr>
 				<td> 交易日期 </td>
 				<td>
-					<%= select :account_record, :account_date, options_for_select(day_list,0.day.ago) %>			
+ 					<%= @deal_record.date.strftime('%m月%d日') %>
 				</td>
 			</tr>
 			<tr>
 				<td> 地點 </td>
 				<td>
-					<%= text_field :account_record, :location, :value=>@account_record.location %>
+					<%= @deal_record.location %>
 				</td>
 			</tr>	
 			<tr>
-				<td> 說明 </td>
+				<td> 描述 </td>
 				<td>
-					<%= text_field :account_record, :note, :value=>@account_record.note %>
+					<%= @deal_record.description %>
 				</td>
-			</tr>			
+			</tr>
+			<tr>
+				<td>總金額</td>
+				<td><%= @deal_record.amount %></td>
+			</tr>
 		</table>
 	</div>
-
 			
-	<div class="account-values">
-		<% @account_record.account_values.each_with_index do |account_value,index| %>	
-			<div class="account-value-field">
-				子交易
+	<div class="deal_items">
+		<% @deal_record.deal_items.each_with_index do |deal_item,index| %>	
+			<div class="deal-item-field">
+				<%="明細#{index+1}"%>
 				<table>
 					<tr>
 						<td>金額</td>
-						<td> <%= account_value.amount %> </td> 
+						<td> <%= deal_item.amount %> </td> 
 					</tr>
 					<tr>
 						<td>類別</td>
-						<td> <%= account_value.first_category.name %> </td>
+						<td> <%= deal_item.first_category_name %> </td>
 					</tr>
 					<tr>
 						<td>項目</td>
-						<td> <%= account_value.second_category.name %> </td>
- 								<%= select object_name, :second_category_id, options_for_select(SecondCategory.all.map{|fc| [fc.name,fc.id]}, account_value.second_category_id) %>						
-							</td>
-						</tr>
-						<tr>
-							<td>出帳戶</td>
-							<td>
-								<%= select object_name, :from_account_id, options_for_select(Account.all.map{|ac| [ac.name,ac.id]}, account_value.from_account_id) %>
-							</td>
-						</tr>
-						<tr>
-							<td>入帳戶</td>
-							<td>
-								<%= select object_name, :to_account_id, options_for_select(Account.all.map{|ac| [ac.name,ac.id]}, account_value.to_account_id) %>	
-							</td>
-						</tr>
-						<tr>
-							<td>描述</td>
-							<td>
-								<%= text_field object_name,:description, :value=>account_value.description %>							
-							</td>
-						</tr>
-					</table>
+						<td> <%= deal_item.second_category_name %> </td>
+					</tr>
+					<tr>
+						<td>描述</td>
+						<td>
+							<%= deal_item.description %>
+						</td>
+					</tr>
+				</table>
 
-					<%= link_to "x","", :onClick=>"vAttributeRemoveRow(event,this)", :class=>"remove" %>
-
-				</div>	
-				<%= link_to "+","", :onClick=>"vAttributeAddRow(event,this)", :class=>"btn btn-default btn-xs" %>
-			<% end %>
-		</div>
+			</div>	
+		<% end %>
+	</div>
 </div>
-
-<% end %>
+	

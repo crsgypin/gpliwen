@@ -33,7 +33,7 @@
 			<% @deal_record.deal_items.each_with_index do |deal_item,index| %>	
 				<% object_name = "deal_record[deal_items_attributes][#{index}]" %>
 				<div class="attribute-field">
-					<%= label_tag "","子交易" %>
+					明細
 					<%= hidden_field object_name,:id, :value=> deal_item.id %>
 					<%= link_to "x","", :onClick=>"vAttributeRemoveRow(event,this)", :class=>"remove" %>
 					<table>
