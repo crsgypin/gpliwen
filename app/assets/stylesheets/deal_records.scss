@@ -5,12 +5,13 @@
 
 	.submit{
 		input{
-			width: 96%;
+			width: 98%;
 	    display: block;
 	    height: 120px;
 	    margin: 0 auto;
 	    background-color: lightgreen;
 	    border-radius: 25px;
+	    border: none;
 	    font-size: 1.5em;
 	    font-family: serif;	    
 		}
@@ -18,69 +19,139 @@
 
 	.record-field{
 		border: 2px solid green;
-    width: 95%;
+    width: 98%;
     margin: 20px auto;
-    border-radius: 10px;
+    border-radius: 20px;
 
-		table{
-			width: 90%;
-	    table-layout: fixed;
-	    margin: 30px auto;
+		.record-field-unit{
+			width: 98%;
+			margin: 0px auto;
+			padding: 20px 0;
 
-			tr{
-				height: 3em;
+			.title{
+				font-size: 0.6em;
+				color: #aaa;
 			}
 
-			td:nth-child(1){width:30%;}
-			td:nth-child(2){width:70%;}
-		
 			select{
-				border-radius: 0px;
-				width: 90%;
+				border-radius: 20px;
+				width: 100%;
+				height: 80px;
 				margin: 0 auto;
 				background-color: lightblue;
+
 			}
 
 			input[type=text]{
-				width: 90%;
+				border-radius: 20px;
+				width: 100%;
+				height: 80px;
 				margin: 0 auto;
 				background-color: lightblue;
+				text-align: center;
 			}
 
+			.total-amount{
+				margin-left:20px;
+			}
 		}
 	}
 
-	.deal-items-attributes{
+	.deal-item-field-group{
     margin: 20px auto;
-    width: 95%;
-    border: 2px solid lightgreen;
-    border-radius: 20px;
+    width: 98%;
+	
+		.deal-item-field-group-title{
+			width:100%;
+			margin:0 0 10px 0;
+			padding: 30px 0 0 10px;
+			border-bottom: 2px solid red;
+			font-size: 1.5em;
+		}
 
-		.attribute-field{
-			margin: 20px 4%;
+		.deal-item-field{
+	    border: 2px solid lightgreen;
+	    border-radius: 20px;
+	    margin: 20px auto;
 
-			.deal-item-table{
-				table-layout: fixed;
+			.deal-item-field-unit{
+				width: 98%;
+				margin: 0px auto;
+				padding: 20px 0;
 
-				tr{height: 3em;}
-				td:nth-child(1){width:30%;}
-				td:nth-child(2){width:70%;}
-
-				select{
-					border-radius: 0px;
-					width: 90%;
-					margin: 0 auto;
-					background-color: lightblue;
+				.title{
+					font-size: 0.6em;
+					color: #aaa;					
 				}
 
-				input[type=text]{
-					width: 90%;
+				select{
+					border-radius: 20px;
+					width: 100%;
+					height: 80px;
 					margin: 0 auto;
-					background-color: lightblue;
+					background-color: snow;
+
+				}
+
+				input[type=text],input[type=number]{
+					border-radius: 20px;
+					width: 100%;
+					height: 80px;
+					margin: 0 auto;
+					background-color: snow;
+					text-align: center;
+				}
+			}
+
+
+			.deal-item-field-payment{
+				
+				.deal-item-field-payment-title{
+					margin: 0 10px 20px 10px;
+					border-bottom: 2px solid lightgrey;
+				}
+
+				.deal-payment-field-group{
+					width:98%;
+					margin: 0 auto;
+					
+					.payment-field{
+
+						.payment-field-unit{
+
+							.title{
+								font-size: 0.6em;
+								color: #aaa;													
+							}
+
+							select{
+								border-radius: 20px;
+								width: 100%;
+								height: 80px;
+								margin: 0 auto;
+								background-color: snow;
+
+							}
+
+							input[type=text],input[type=number]{
+								border-radius: 20px;
+								width: 100%;
+								height: 80px;
+								margin: 0 auto;
+								background-color: snow;
+								text-align: center;
+							}
+
+						}
+
+					}
+
 				}
 
 			}
 		}
+
+
 
 		select{
 			border-radius: 0px;	
