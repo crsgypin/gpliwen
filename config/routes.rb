@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :account_records
+  resources :deal_records
 
 
-  root 'account_records#new'
+  root 'deal_records#new'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

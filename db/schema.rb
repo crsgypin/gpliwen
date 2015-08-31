@@ -47,18 +47,17 @@ ActiveRecord::Schema.define(version: 20150830095132) do
   add_index "deal_items", ["third_category_id"], name: "index_deal_items_on_third_category_id"
 
   create_table "deal_payments", force: :cascade do |t|
-    t.integer  "deal_record_id"
     t.integer  "amount"
     t.integer  "account_entity_id"
     t.integer  "account_owner_id"
-    t.integer  "proportion"
+    t.integer  "deal_item_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
 
   add_index "deal_payments", ["account_entity_id"], name: "index_deal_payments_on_account_entity_id"
   add_index "deal_payments", ["account_owner_id"], name: "index_deal_payments_on_account_owner_id"
-  add_index "deal_payments", ["deal_record_id"], name: "index_deal_payments_on_deal_record_id"
+  add_index "deal_payments", ["deal_item_id"], name: "index_deal_payments_on_deal_item_id"
 
   create_table "deal_records", force: :cascade do |t|
     t.date     "date"

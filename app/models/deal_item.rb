@@ -6,5 +6,7 @@ class DealItem < ActiveRecord::Base
 	delegate :name, :to=>:first_category, :prefix=>true, :allow_nil=>true
 	delegate :name, :to=>:second_category, :prefix=>true, :allow_nil=>true
 	delegate :name, :to=>:third_category, :prefix=>true, :allow_nil=>true
+	has_many :deal_payments, :dependent=>:destroy
+	accepts_nested_attributes_for :deal_payments, allow_destroy: true
 
 end
