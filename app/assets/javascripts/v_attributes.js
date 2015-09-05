@@ -72,7 +72,7 @@ var vField = function(html){
 		var newFieldIDName = this.newFieldIDName(newIndex);
 
 		newObject.find('*').andSelf().each(function(index,element){
-			var list = ['name','vfield','vfieldtarget']
+			var list = ['name','vfield','vfieldtarget','vfieldgroup']
 			list.forEach(function(str){
 				var elmAttr = $(element).attr(str);
 				if(elmAttr){
