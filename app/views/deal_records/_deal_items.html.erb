@@ -12,7 +12,7 @@
 		<div class="deal-item-field" vField=<%=deal_item_name_index%>>
 			明細
 			<%= hidden_field deal_item_name_index,:id, :value=> deal_item.id %>
-			<%= link_to "x","", :class=>"remove", vFieldRemove:deal_item_name_index %>
+			<%= link_to "x","", :class=>"remove", vFieldTarget:deal_item_name_index %>
 
 			<div class="deal-item-field-unit">
 				<div class="title"> 金額 </div>	
@@ -76,13 +76,13 @@
 							</div>
 						</div>
 
-						<%= link_to "xx","", :onClick=>"vAttributeRemoveRow(event,this)", 
+						<%= link_to "xx","", :onClick=>"vRemoveField(event,this)", 
 																 :class=>"remove",
-																 :vFieldRemove=>deal_payment_name_index %>
+																 :vFieldTarget=>deal_payment_name_index %>
 					</div> <%# payment-field %>
 					<%= link_to "++","", :onClick=>"vAddField(event,this)", 
 															 :class=>"btn btn-default btn-xs",
-															 :vFieldAdd=>deal_payment_name %>
+															 :vFieldTarget=>deal_payment_name %>
 				<% end %>	<%# deal_item.deal_payments.each_with_index  %>
 				</div>
 
@@ -91,7 +91,7 @@
 	<% end %>
 	<%= link_to "+","", :onClick=>"vAddField(event,this)", 
 											:class=>"btn btn-default btn-xs", 
-											:vFieldAdd=>deal_item_name %>
+											:vFieldTarget=>deal_item_name %>
 </div>
 
 

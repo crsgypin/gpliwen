@@ -1,14 +1,15 @@
 var vAddField = function(e,object){
 	e.preventDefault();
-	var fieldGroupName = $(object).attr('vFieldAdd').replace(/\[/g,'\\[').replace(/\]/g,'\\]')
+	var fieldGroupName = $(object).attr('vFieldTarget').replace(/\[/g,'\\[').replace(/\]/g,'\\]')
 	var vAttrFieldGroup = new vFieldGroup($('[vFieldGroup=' + fieldGroupName + ']')[0])
 	//$(object).closest('[vFieldGroup=' + fieldGroupName + ']') failed to find
 	vAttrFieldGroup.addField();
 }
 
-var vAttributeRemoveRow = function(e,object){
-	e.preventDefault();
-	var vAttrField = new vField($(object).closest('.attribute-field')[0])
+var vRemoveField = function(e,object){
+	e.preventDefault();	
+	var fieldName = $(object).attr('vFieldTarget').replace(/\[/g,'\\[').replace(/\]/g,'\\]')
+	var vAttrField = new vField($('[vField=' + fieldName + ']' )[0])
 	vAttrField.remove_this();
 }
 
@@ -39,9 +40,6 @@ var vFieldGroup = function(html){
 		var vAF = new vField(this.object.find('[vField=' + findFieldName + '\\[' + 0 + '\\]]')[0])
 		this.object.find('[vField=' + findFieldName + '\\[' + maxIndex + '\\]]').after(vAF.clone(newIndex));
 	}
-	this.removeField = function(index){
-
-	}
 }
 
 var vField = function(html){
@@ -50,7 +48,6 @@ var vField = function(html){
 	this.idValue = "";
 	this.fieldName= this.object.attr('vField')
 	this.index = parseInt(this.fieldName.match(/(\d+)(?!.*\d)/)[0])
-	this.destroyName = this.fieldName + "[_destroy]"
 	this.fieldIDName = this.fieldName.match(/\w+/g).join('_');
 
 	this.init = function(){
@@ -75,7 +72,7 @@ var vField = function(html){
 		var newFieldIDName = this.newFieldIDName(newIndex);
 
 		newObject.find('*').andSelf().each(function(index,element){
-			var list = ['name','vfield','vfieldremove','vfieldadd']
+			var list = ['name','vfield','vfieldtarget']
 			list.forEach(function(str){
 				var elmAttr = $(element).attr(str);
 				if(elmAttr){
@@ -96,25 +93,28 @@ var vField = function(html){
 		})
 		return newObject;
 	}
+
 	this.remove_this = function(){
-		if(this.idValue==""){
+		if (this.index == 0){
+			this.object.find('*').andSelf().each(function(index,element){			
+				if ($(element).prop('tagName').toLowerCase() != 'option'){
+					if($(element).attr('value')){
+						$(element).attr('value',"")
+					};
+					$(element).val("");
+				}
+			})
+		}else if (this.idValue==""){
 			this.object.remove();
 		}else{
-			var hiddenInput = $("<input type='hidden' name=" + this.destroyName + " value='1'>")[0]
-				this.object.prepend(hiddenInput);
-			this.object.hide();
+		var hiddenInput = $("<input type='hidden' name=" + this.fieldName + "[_destroy] value='1'>")[0]
+		this.object.prepend(hiddenInput);
+		this.object.hide();
 		}
 	}
 
 	this.newFieldName = function(newIndex){
-		var lastIndex = this.fieldName.length;
-		for(i=this.fieldName.length ; i>0;i--){
-			if(this.fieldName[i]=='['){
-				lastIndex = i;
-				break;
-			}
-		}
-		return this.fieldName.substring(0,lastIndex) + "[" + newIndex + "]";
+		return this.fieldGroupName() + "[" + newIndex + "]";
 	}
 
 	this.newFieldIDName = function(newIndex){
@@ -126,6 +126,17 @@ var vField = function(html){
 			}			
 		}
 		return this.fieldIDName.substring(0,lastIndex) + "_" + newIndex;
+	}
+
+	this.fieldGroupName = function(){
+		var lastIndex = this.fieldName.length;
+		for(i=this.fieldName.length ; i>0;i--){
+			if(this.fieldName[i]=='['){
+				lastIndex = i;
+				break;
+			}
+		}
+		return this.fieldName.substring(0,lastIndex)
 	}
 
 	this.init();
