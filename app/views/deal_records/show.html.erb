@@ -1,6 +1,9 @@
 
 
 <div class="deal-record-show">
+	<div class="back">
+		<%=link_to "回清單",deal_records_path %>
+	</div>
 	<div class="record-field">
 		<table>
 			<tr>
@@ -28,7 +31,7 @@
 		</table>
 	</div>
 			
-	<div class="deal_items">
+	<div class="deal-item-group">
 		<% @deal_record.deal_items.each_with_index do |deal_item,index| %>	
 			<div class="deal-item-field">
 				<%="明細#{index+1}"%>
