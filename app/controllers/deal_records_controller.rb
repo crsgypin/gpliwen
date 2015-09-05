@@ -12,6 +12,7 @@ class DealRecordsController < ApplicationController
 		@deal_record = DealRecord.new
 		@deal_item = @deal_record.deal_items.new
 		@deal_item.deal_payments.new
+		render 'deal_records/form.html'
 	end
 
 	def create
@@ -21,6 +22,16 @@ class DealRecordsController < ApplicationController
 		else
 			render "deal_records/new"
 		end
+	end
+
+	def edit
+		@deal_record = DealRecord.find(params[:id])
+		render 'deal_records/form.html'		
+	end
+
+	def update
+		@deal_record = DealRecord.find(params[:id])
+		redirect_to deal_record_path(@deal_record)
 	end
 
 private

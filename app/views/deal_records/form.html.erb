@@ -1,8 +1,15 @@
 
 
+<% if @deal_record.new_record? %>
+	<% path = deal_records_path %>
+	<% method = :post %>
+<% else %>
+	<% path = deal_record_path(@deal_record) %>
+	<% method = :patch %>
+<% end %>
 
-<%= form_tag deal_records_path do %>
-<div class="deal-record-new">
+<%= form_tag path, :method=>method do %>
+<div class="deal-record-form">
 		<div class="submit">
 			<%= submit_tag "儲存這筆記錄" %>
 		</div>

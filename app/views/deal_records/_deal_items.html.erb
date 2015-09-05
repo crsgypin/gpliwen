@@ -54,44 +54,42 @@
 				</div>	
 
 				<% deal_payment_name = "#{deal_item_name_index}[deal_payments_attributes]" %>
+
 				<div class="deal-payment-field-group" vFieldGroup=<%=deal_payment_name%>>
+					<% deal_item.deal_payments.each_with_index do |deal_payment,subindex| %>
+						<% deal_payment_name_index = "#{deal_payment_name}[#{subindex}]" %>
+						<div class="payment-field" vField=<%=deal_payment_name_index%> >
 
-				<% deal_item.deal_payments.each_with_index do |deal_payment,subindex| %>
-					<% deal_payment_name_index = "#{deal_payment_name}[#{subindex}]" %>
-					<div class="payment-field" vField=<%=deal_payment_name_index%> >
-
-						<%= hidden_field deal_payment_name_index, :id, :value=> deal_payment.id %>
-						
-						<div class="payment-field-unit">
-							<div class="title"> 交易帳號 </div>
-							<div class="input">
-								<%= select deal_payment_name_index, :account_entity_id, options_for_select(AccountEntity.all.map{|entity| ["#{entity.account_owner.name}-#{entity.name}",entity.id]},deal_payment.id) %>									
+							<%= hidden_field deal_payment_name_index, :id, :value=> deal_payment.id %>
+							<div class="remove">
+								<%= link_to "移除","", :onClick=>"vRemoveField(event,this)", 
+																	 :vFieldTarget=>deal_payment_name_index %>								
 							</div>
-						</div>
 
-						<div class="payment-field-unit">
-							<div class="title"> 金額 </div>
-							<div class="input">
-									<%= number_field deal_payment_name_index, :amount, :value=>deal_payment.amount %>
+							<div class="amount">
+								<%= number_field deal_payment_name_index, :amount, :value=>deal_payment.amount, :placeholder=>"金額" %>							
 							</div>
-						</div>
 
-						<%= link_to "xx","", :onClick=>"vRemoveField(event,this)", 
-																 :class=>"remove",
-																 :vFieldTarget=>deal_payment_name_index %>
-					</div> <%# payment-field %>
-					<%= link_to "++","", :onClick=>"vAddField(event,this)", 
-															 :class=>"btn btn-default btn-xs",
-															 :vFieldTarget=>deal_payment_name %>
-				<% end %>	<%# deal_item.deal_payments.each_with_index  %>
+							<div class="account-entity">
+								<%= select deal_payment_name_index, :account_entity_id, options_for_select(AccountEntity.all.map{|entity| ["#{entity.account_owner.name}-#{entity.name}",entity.id]},deal_payment.id) %>																
+							</div>
+
+						</div> <%# payment-field %>
+						<div class="add-payment-field">
+							<%= link_to "新增交易方式","", :onClick=>"vAddField(event,this)", 
+																	 :vFieldTarget=>deal_payment_name %>							
+						</div>
+					<% end %>	<%# deal_item.deal_payments.each_with_index  %>
 				</div>
 
 			</div>	<%# deal-item-field-payment %>
 		</div>	<%# attribute-field %>
 	<% end %>
-	<%= link_to "+","", :onClick=>"vAddField(event,this)", 
-											:class=>"btn btn-default btn-xs", 
-											:vFieldTarget=>deal_item_name %>
+
+	<div class="add-deal-item-field">
+		<%= link_to "新增明細","", :onClick=>"vAddField(event,this)",  
+											:vFieldTarget=>deal_item_name %>	
+	</div>
 </div>
 
 
