@@ -3,57 +3,64 @@
 <% if @deal_record.new_record? %>
 	<% path = deal_records_path %>
 	<% method = :post %>
+	<% title = "新增交易紀錄" %>
 <% else %>
 	<% path = deal_record_path(@deal_record) %>
 	<% method = :patch %>
+	<% title = "編輯 #{@deal_record.date.strf.time('%m月%d日')} 在#{@deal_record.location}的交易紀錄" %>
 <% end %>
 
 <%= form_tag path, :method=>method do %>
 <div class="deal-record-form">
-		<div class="record-field">
-			<div class="record-field-date-amount">
-				<div class="date">
-					<div class="title">
-						交易日期
-					</div>
-					<div class="input">
-						<%= select :deal_record, :date, options_for_select(day_list,0.day.ago) %>			
-					</div>
-				</div>
-				
-				<div class="total-amount">
-					<div class="title"> 總金額 </div>
-					<div class="value">
-						0
-					</div>
-				</div>				
-			</div>
+	
+	<div class="deal-record-form-title">
+		<%= title %>
+	</div>
 
-			<div class="record-field-unit">
+	<div class="record-field">
+		<div class="record-field-date-amount">
+			<div class="date">
 				<div class="title">
-					地點
+					交易日期
 				</div>
 				<div class="input">
-					<%= text_field :deal_record, :location, :value=>@deal_record.location %>
+					<%= select :deal_record, :date, options_for_select(day_list,0.day.ago) %>			
 				</div>
 			</div>
 			
-			<div class="record-field-unit">
-				<div class="title">
-					說明
+			<div class="total-amount">
+				<div class="title"> 總金額 </div>
+				<div class="value">
+					0
 				</div>
-				<div class="input">
-					<%= text_field :deal_record, :description, :value=>@deal_record.description %>
-				</div>
+			</div>				
+		</div>
+
+		<div class="record-field-unit">
+			<div class="title">
+				地點
 			</div>
-
+			<div class="input">
+				<%= text_field :deal_record, :location, :value=>@deal_record.location %>
+			</div>
+		</div>
+		
+		<div class="record-field-unit">
+			<div class="title">
+				說明
+			</div>
+			<div class="input">
+				<%= text_field :deal_record, :description, :value=>@deal_record.description %>
+			</div>
 		</div>
 
-		<%= render :partial=>"deal_records/deal_items.html", :locals=>{:deal_record=>@deal_record} %>
+	</div>
 
-		<div class="submit">
-			<%= submit_tag "儲存這筆記錄" %>
-		</div>
+	<%= render :partial=>"deal_records/deal_items.html", :locals=>{:deal_record=>@deal_record} %>
+
+	<div class="submit">
+		<%= submit_tag "儲存這筆記錄" %>
+	</div>
 
 
 </div>
