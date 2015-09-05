@@ -10,20 +10,25 @@
 
 <%= form_tag path, :method=>method do %>
 <div class="deal-record-form">
-		<div class="submit">
-			<%= submit_tag "儲存這筆記錄" %>
-		</div>
-
 		<div class="record-field">
-			<div class="record-field-unit">
-				<div class="title">
-					交易日期
+			<div class="record-field-date-amount">
+				<div class="date">
+					<div class="title">
+						交易日期
+					</div>
+					<div class="input">
+						<%= select :deal_record, :date, options_for_select(day_list,0.day.ago) %>			
+					</div>
 				</div>
-				<div class="input">
-					<%= select :deal_record, :date, options_for_select(day_list,0.day.ago) %>			
-				</div>
+				
+				<div class="total-amount">
+					<div class="title"> 總金額 </div>
+					<div class="value">
+						0
+					</div>
+				</div>				
 			</div>
-			
+
 			<div class="record-field-unit">
 				<div class="title">
 					地點
@@ -42,15 +47,14 @@
 				</div>
 			</div>
 
-			<div class="record-field-unit">
-				<div class="title"> 總金額 </div>
-				<div class="total-amount">
-					0
-				</div>
-			</div>
 		</div>
 
 		<%= render :partial=>"deal_records/deal_items.html", :locals=>{:deal_record=>@deal_record} %>
+
+		<div class="submit">
+			<%= submit_tag "儲存這筆記錄" %>
+		</div>
+
 
 </div>
 

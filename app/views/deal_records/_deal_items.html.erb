@@ -10,36 +10,46 @@
 		<% deal_item_name_index = "#{deal_item_name}[#{index}]" %>
 
 		<div class="deal-item-field" vField=<%=deal_item_name_index%>>
-			明細
 			<%= hidden_field deal_item_name_index,:id, :value=> deal_item.id %>
-			<%= link_to "x","", :class=>"remove", vFieldTarget:deal_item_name_index %>
-
-			<div class="deal-item-field-unit">
-				<div class="title"> 金額 </div>	
-				<div class="input">
-					<%= number_field deal_item_name_index ,:amount, value: deal_item.amount %>	
+			<div class="deal-item-field-remove-amount">
+				<div class="remove">
+					<%= link_to "清除","",:onClick=>"vRemoveField(event,this)",  vFieldTarget:deal_item_name_index %>			
+				</div>
+				<div class="amount">
+					<%= number_field deal_item_name_index ,:amount, value: deal_item.amount, :placeholder=>"金額" %>						
 				</div>
 			</div>
 
-			<div class="deal-item-field-unit">
-				<div class="title">
-					主項目
-				</div>	
-				<div class="input">
-					<%= select deal_item_name_index, :first_category_id, options_for_select(FirstCategory.all.map{|fc| [fc.name,fc.id]}, deal_item.first_category_id) %>
+			<div class="deal-item-field-category">
+				<div class="first">
+					<div class="title">
+						主項目
+					</div>	
+					<div class="input">
+						<%= select deal_item_name_index, :first_category_id, options_for_select(FirstCategory.all.map{|fc| [fc.name,fc.id]}, deal_item.first_category_id) %>
+					</div>
+				</div>
+
+				<div class="second">
+					<div class="title">
+						次項目
+					</div>	
+					<div class="input">
+						<%= select deal_item_name_index, :second_category_id, options_for_select(SecondCategory.all.map{|fc| [fc.name,fc.id]}, deal_item.second_category_id) %>						
+					</div>
+				</div>					
+	
+				<div class="third">
+					<div class="title">
+						小項目
+					</div>	
+					<div class="input">
+						<%= select deal_item_name_index, :third_category_id, options_for_select(ThirdCategory.all.map{|fc| [fc.name,fc.id]}, deal_item.third_category_id) %>						
+					</div>					
 				</div>
 			</div>
 
-			<div class="deal-item-field-unit">
-				<div class="title">
-					次項目
-				</div>	
-				<div class="input">
-					<%= select deal_item_name_index, :second_category_id, options_for_select(SecondCategory.all.map{|fc| [fc.name,fc.id]}, deal_item.second_category_id) %>						
-				</div>
-			</div>					
-
-			<div class="deal-item-field-unit">
+			<div class="deal-item-field-description">
 				<div class="title">
 					描述
 				</div>	
@@ -62,7 +72,7 @@
 
 							<%= hidden_field deal_payment_name_index, :id, :value=> deal_payment.id %>
 							<div class="remove">
-								<%= link_to "移除","", :onClick=>"vRemoveField(event,this)", 
+								<%= link_to "清除","", :onClick=>"vRemoveField(event,this)", 
 																	 :vFieldTarget=>deal_payment_name_index %>								
 							</div>
 
