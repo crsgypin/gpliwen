@@ -6,7 +6,6 @@ gem 'rails', '4.2.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -34,6 +33,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'omniauth-facebook'
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'capistrano-rails', :group => :development
+gem 'capistrano-passenger', :group => :development
+#bundle exec cap install
+gem 'mysql2'
+gem "nested_form"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
