@@ -16,7 +16,10 @@
 					<%= link_to "清除","",	:onClick=>"vRemoveField(event,this,recountTotalAmount)",  vFieldTarget:deal_item_name_index %>			
 				</div>
 				<div class="amount">
-					<%= number_field deal_item_name_index ,:amount, value: deal_item.amount, :placeholder=>"金額",:class=>"input-amount" %>						
+					<%= number_field deal_item_name_index ,:amount, 
+																								 value: deal_item.amount, 	
+																								 :placeholder=>"金額",
+																								 :class=>"deal-item-input-amount" %>						
 				</div>
 			</div>
 
@@ -77,7 +80,10 @@
 							</div>
 
 							<div class="amount">
-								<%= number_field deal_payment_name_index, :amount, :value=>deal_payment.amount, :placeholder=>"金額" %>							
+								<%= number_field deal_payment_name_index, :amount, 
+																													:value=>deal_payment.amount, 
+																													:placeholder=>"金額",
+																													:class=>"payment-input-amount" %>							
 							</div>
 
 							<div class="account-entity">

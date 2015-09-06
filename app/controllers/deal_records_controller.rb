@@ -18,7 +18,7 @@ class DealRecordsController < ApplicationController
 	def create
 		@deal_record = DealRecord.new(deal_record_params)
 		if @deal_record.save
-			redirect_to new_deal_record_path
+			redirect_to deal_record_path(@deal_record)
 		else
 			render "deal_records/new"
 		end

@@ -78,45 +78,51 @@
 
 
 
+/* deal-recrod*/
+.deal-record-form-title-amount{
+	padding:20px 2%;
+	height: 100px;
+	width:100%;
+	top:100px;
+	position: fixed;
+	background-color: #aaa;
+
+	.title{
+		float: left;
+		color:white;
+		width: 40%;
+	}
+
+	.total-amount{
+		width:40%;
+		float: right;
+
+		.title{
+			float: left;
+			width:40%;
+		}
+
+		.value{
+			float: left;
+			width:60%;
+			background-color: tomato;
+			text-align: center;
+			height: 60px;
+			line-height: 60px;	
+		}
+	}
+
+	.total-amount::after{
+		content: "";
+		display: block;
+		clear:both;			
+	}
+}
+
 .deal-record-form{
 	padding:20px 0 400px 0;
 	background-color: #aaa;
-
-	.deal-record-form-title-amount{
-		padding:0 2%;
-		height: 80px;
-		
-		.title{
-			float: left;
-			color:white;
-			width: 40%;
-		}
-
-		.total-amount{
-			width:40%;
-			float: right;
-
-			.title{
-				float: left;
-				width:40%;
-			}
-
-			.value{
-				float: left;
-				width:60%;
-				background-color: tomato;
-				text-align: center;
-				height: 60px;
-				line-height: 60px;	
-			}
-		}
-
-		.total-amount::after{
-			content: "";
-			display: block;
-			clear:both;			
-		}
-	}
+	margin: 180px 0 0 0;
 
 	.deal-record-form-title-amount::after{
 		content: "";
@@ -229,7 +235,7 @@
 
 					input[type=number]{
 						width:100%;
-						background-color: snow;
+						background-color: tomato;
 						border-radius: 20px;
 						text-align: center;
 					}
@@ -346,7 +352,7 @@
 								height: 80px;
 								width:100%;
 								margin: 0 auto;
-								background-color: snow;
+								background-color: #cff;
 								text-align: center;
 							}
 						}
