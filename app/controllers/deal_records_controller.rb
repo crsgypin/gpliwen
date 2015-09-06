@@ -1,4 +1,5 @@
 class DealRecordsController < ApplicationController
+	before_action :check_current_user
 
 	def index
 		@deal_records = DealRecord.includes(:deal_items =>[:first_category, :second_category, :third_category, 
@@ -45,5 +46,4 @@ private
 										:deal_items_attributes=>[:id, :amount, :description, :first_category_id,:second_category_id, :third_category_id,
 										:deal_payments_attributes=>[:id, :amount, :account_entity_id, :account_owner_id]])
 	end
-
 end
