@@ -1,7 +1,7 @@
 class DealRecordsController < ApplicationController
 
 	def index
-		@deal_records = DealRecord.includes(:deal_items)
+		@deal_records = DealRecord.includes(:deal_items =>[:deal_payments=>[:account_owner]])
 	end
 
 	def show
@@ -31,6 +31,7 @@ class DealRecordsController < ApplicationController
 
 	def update
 		@deal_record = DealRecord.find(params[:id])
+		@deal_record.update!(deal_record_params)
 		redirect_to deal_record_path(@deal_record)
 	end
 

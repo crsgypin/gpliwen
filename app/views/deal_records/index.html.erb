@@ -4,19 +4,32 @@
 	<table>
 		<tr>
 			<td> 日期 </td>
-			<td> 交易地點 </td>
-			<td> 描述 </td>
+			<td> 地點/描述 </td>
 			<td> 交易金額 </td>
 			<td> 交易類別 </td>
+			<td> 交易方式 </td>
 			<td></td>
 		</tr>
 		<% @deal_records.each do |deal_record| %>
 			<tr>
-				<td> <%= deal_record.date.strftime('%m月%d日') %> </td>
-				<td> <%= deal_record.location %> </td>	
-				<td> <%= deal_record.description %> </td>
+				<td> 
+					<%= deal_record.display_date %>
+				</td>
+				<td> 
+					<div class="deal-record-location"><%= deal_record.location %> </div>
+					<div class="deal-record-description"> <%= deal_record.description %> </div>
+					<div class="deal-record-item-descriptions"> <%= deal_record.deal_items.map{|di| di.description}.join('<br>').html_safe %> </div>
+			  </td>	
 				<td> <%= deal_record.amount %> </td>
 				<td> <%= deal_record.total_first_category %> </td>
+				<td> 
+					<ul>
+						<% deal_record.payment_list.each do |payment| %>
+							<li> <%= "#{payment.account_owner.try(:name)} #{payment.name}" %> </li>
+						<% end %>
+					</ul>
+
+				</td>
 				<td> <%= link_to "細節", deal_record_path(deal_record), :class=>"btn btn-default detail"%> </td>
 			</tr>
 		<% end %>

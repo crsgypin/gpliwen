@@ -7,7 +7,7 @@
 <% else %>
 	<% path = deal_record_path(@deal_record) %>
 	<% method = :patch %>
-	<% title = "編輯 #{@deal_record.date.strf.time('%m月%d日')} 在#{@deal_record.location}的交易紀錄" %>
+	<% title = "#{@deal_record.display_date}交易記錄<br>地點：#{@deal_record.location}".html_safe %>
 <% end %>
 
 

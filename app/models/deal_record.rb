@@ -12,6 +12,20 @@ class DealRecord < ActiveRecord::Base
 		self.deal_items.map{|deal_item| deal_item.first_category.name}.uniq.join(', ')
 	end
 
+	def display_date
+		self.date.strftime(('%m月%d日'))
+	end
+
+	def payment_list
+		payment_entities = []
+		self.deal_items.each do |deal_item|
+			deal_item.deal_payments.each do |deal_payment|
+				payment_entities << deal_payment.account_entity
+			end
+		end
+		payment_entities.uniq
+	end
+
 private
 	def check_deal_item_amount
 		self.deal_items.each do |deal_item|
