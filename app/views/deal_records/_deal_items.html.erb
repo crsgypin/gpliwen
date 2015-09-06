@@ -13,10 +13,10 @@
 			<%= hidden_field deal_item_name_index,:id, :value=> deal_item.id %>
 			<div class="deal-item-field-remove-amount">
 				<div class="remove">
-					<%= link_to "清除","",:onClick=>"vRemoveField(event,this)",  vFieldTarget:deal_item_name_index %>			
+					<%= link_to "清除","",	:onClick=>"vRemoveField(event,this,recountTotalAmount)",  vFieldTarget:deal_item_name_index %>			
 				</div>
 				<div class="amount">
-					<%= number_field deal_item_name_index ,:amount, value: deal_item.amount, :placeholder=>"金額" %>						
+					<%= number_field deal_item_name_index ,:amount, value: deal_item.amount, :placeholder=>"金額",:class=>"input-amount" %>						
 				</div>
 			</div>
 
@@ -72,7 +72,7 @@
 
 							<%= hidden_field deal_payment_name_index, :id, :value=> deal_payment.id %>
 							<div class="remove">
-								<%= link_to "清除","", :onClick=>"vRemoveField(event,this)", 
+								<%= link_to "清除","", :onClick=>"vRemoveField(event,this,recountTotalAmount)", 
 																	 :vFieldTarget=>deal_payment_name_index %>								
 							</div>
 

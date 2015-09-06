@@ -82,23 +82,56 @@
 	padding:20px 0 400px 0;
 	background-color: #aaa;
 
-	.deal-record-form-title{
-		color:white;
+	.deal-record-form-title-amount{
 		padding:0 2%;
+		height: 80px;
+		
+		.title{
+			float: left;
+			color:white;
+			width: 40%;
+		}
+
+		.total-amount{
+			width:40%;
+			float: right;
+
+			.title{
+				float: left;
+				width:40%;
+			}
+
+			.value{
+				float: left;
+				width:60%;
+				background-color: tomato;
+				text-align: center;
+				height: 60px;
+				line-height: 60px;	
+			}
+		}
+
+		.total-amount::after{
+			content: "";
+			display: block;
+			clear:both;			
+		}
+	}
+
+	.deal-record-form-title-amount::after{
+		content: "";
+		display: block;
+		clear:both;
 	}
 
 	.record-field{
-	   width: 98%;
+	   width: 96%;
 	   margin: 0px auto;
-	   padding: 20px 3% 30px  ;
-		background-color: #ffefe3;
+	   padding: 20px 3% 10px  ;
+  	 background-color: #ffefe3;
 
-		.record-field-date-amount{
 
-			.title{
-				font-size: 0.6em;
-				color: #aaa;
-			}
+		.record-field-date-location{
 
 			.date{
 				width:40%;
@@ -114,28 +147,30 @@
 				}
 			}
 
-			.total-amount{
-				width:40%;
+			.location{
 				float: right;
+				width: 50%;
 
-				.value{
-					background-color: lightgreen;
-					text-align: center;
+				input[type=text]{
+					border-radius: 20px;
+					width: 100%;
 					height: 80px;
-					line-height: 80px;	
+					margin: 0 auto;
+					background-color: lightblue;
+					text-align: center;
 				}
 			}
 
 		}
 
-		.record-field-date-amount::after{
+		.record-field-date-location::after{
 			content:"";
 			display: block;
 			clear:both;
 		}
 
 
-		.record-field-unit{
+		.record-field-description{
 			width: 98%;
 			margin: 0px auto;
 			padding: 20px 0;
@@ -143,15 +178,6 @@
 			.title{
 				font-size: 0.6em;
 				color: #aaa;
-			}
-
-			select{
-				border-radius: 20px;
-				width: 100%;
-				height: 80px;
-				margin: 0 auto;
-				background-color: lightblue;
-
 			}
 
 			input[type=text]{
@@ -163,16 +189,13 @@
 				text-align: center;
 			}
 
-			.total-amount{
-				margin-left:20px;
-			}
 		}
 	}
 
 	.deal-item-field-group{
     margin: 20px auto 20px;
     padding: 0 0 40px;
-    width: 98%;
+    width: 96%;
 	
 		.deal-item-field-group-title{
 			width:100%;

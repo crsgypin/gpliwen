@@ -1,16 +1,22 @@
-var vAddField = function(e,object){
+var vAddField = function(e,object,callback){
 	e.preventDefault();
 	var fieldGroupName = $(object).attr('vFieldTarget').replace(/\[/g,'\\[').replace(/\]/g,'\\]')
 	var vAttrFieldGroup = new vFieldGroup($('[vFieldGroup=' + fieldGroupName + ']')[0])
 	//$(object).closest('[vFieldGroup=' + fieldGroupName + ']') failed to find
 	vAttrFieldGroup.addField();
+	if (callback && typeof(callback) == "function"){
+		callback();
+	}
 }
 
-var vRemoveField = function(e,object){
+var vRemoveField = function(e,object,callback){
 	e.preventDefault();	
 	var fieldName = $(object).attr('vFieldTarget').replace(/\[/g,'\\[').replace(/\]/g,'\\]')
 	var vAttrField = new vField($('[vField=' + fieldName + ']' )[0])
 	vAttrField.remove_this();
+	if (callback && typeof(callback) == "function"){
+		callback();
+	}
 }
 
 //regex find last number match(/(\d+)(?!.*\d)/)[0]
