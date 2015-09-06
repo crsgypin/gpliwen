@@ -40,6 +40,7 @@ gem 'capistrano-passenger', :group => :development
 #bundle exec cap install
 gem 'mysql2'
 gem "nested_form"
+gem 'kaminari'
 
 
 group :development, :test do

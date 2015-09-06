@@ -1,8 +1,20 @@
 
 <div class="deal-record-index">
 	
+	<div class="info-box">
+		<div class="title">
+			近三個月的交易紀錄
+		</div>
+		<div class="page-info">
+			<%= page_entries_info @deal_records, :entry_name=>"交易紀錄" %>		
+		</div>
+		<div class="page-link">
+			<%= paginate @deal_records %>		
+		</div>
+	</div>
 	<table>
 		<tr>
+			<td></td>
 			<td> 日期 </td>
 			<td> 地點/描述 </td>
 			<td> 交易金額 </td>
@@ -10,18 +22,24 @@
 			<td> 交易方式 </td>
 			<td></td>
 		</tr>
-		<% @deal_records.each do |deal_record| %>
+		<% @deal_records.each_with_index do |deal_record,index| %>
 			<tr>
+				<td> <%= index+1 %> </td>
 				<td> 
 					<%= deal_record.display_date %>
 				</td>
 				<td> 
 					<div class="deal-record-location"><%= deal_record.location %> </div>
 					<div class="deal-record-description"> <%= deal_record.description %> </div>
-					<div class="deal-record-item-descriptions"> <%= deal_record.deal_items.map{|di| di.description}.join('<br>').html_safe %> </div>
 			  </td>	
 				<td> <%= deal_record.amount %> </td>
-				<td> <%= deal_record.total_first_category %> </td>
+				<td> 
+					<ul class="deal-item-name-amount">
+						<% deal_record.deal_items.each do |deal_item| %> 
+							<li> <%= "#{deal_item.first_category.name}-#{deal_item.amount}" %> </li>
+						<% end %>
+					</ul>
+				</td>
 				<td> 
 					<ul>
 						<% deal_record.payment_list.each do |payment| %>

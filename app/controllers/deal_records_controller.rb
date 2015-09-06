@@ -1,7 +1,9 @@
 class DealRecordsController < ApplicationController
 
 	def index
-		@deal_records = DealRecord.includes(:deal_items =>[:deal_payments=>[:account_owner]])
+		@deal_records = DealRecord.includes(:deal_items =>[:first_category, :second_category, :third_category, 
+																				:deal_payments=>[:account_owner,:account_entity=>[:account_owner]]])
+		@deal_records = @deal_records.page(params[:page]).per(10)
 	end
 
 	def show

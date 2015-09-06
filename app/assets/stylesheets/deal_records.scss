@@ -19,12 +19,20 @@ $navHeight: 100px;
 			height: 80px;
 		}
 
-		td:nth-child(1){width:15%;}
-		td:nth-child(2){width:20%;}
+		ul{
+			padding: 0;
+			li{
+				list-style: none;
+			}
+		}
+
+		td:nth-child(1){width:5%;}
+		td:nth-child(2){width:15%;}
 		td:nth-child(3){width:20%;}
-		td:nth-child(4){width:15%;}
-		td:nth-child(5){width:20%;}
-		td:nth-child(6){width:12%;}
+		td:nth-child(4){width:20%;}
+		td:nth-child(5){width:15%;}
+		td:nth-child(6){width:20%;}
+		td:nth-child(7){width:12%;}
 
 		.detail{
 			width: 100%;

@@ -8,9 +8,6 @@ class DealRecord < ActiveRecord::Base
 	before_save :check_deal_item_amount
 	before_save :calculate_amount
 
-	def total_first_category
-		self.deal_items.map{|deal_item| deal_item.first_category.name}.uniq.join(', ')
-	end
 
 	def display_date
 		self.date.strftime(('%m月%d日'))
