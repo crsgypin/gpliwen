@@ -1,8 +1,41 @@
 
-<div class="nav">
-	<%= link_to "新增交易", new_deal_record_path %>	
-	<%= link_to "交易紀錄", deal_records_path %>	
-</div>
+<% if mobile_device? %>
+	<div class="nav-mobile">
+		<%= link_to "目錄", "",:class=>"menu" %>
+
+		<div class="background"></div>
+		<div class="menu-select">
+			<%= link_to "新增表單",new_deal_record_path %>
+			<%= link_to "交易紀錄",deal_records_path %>
+			<%= link_to "取消", "",:class=>"cancel"%>
+		</div>
+	</div>
+
+
+<% else %>
+	<div class="nav-web">
+		<%= link_to "新增交易", new_deal_record_path %>	
+		<%= link_to "交易紀錄", deal_records_path %>	
+	</div>
+<% end %>
 
 
 
+
+<script>
+
+$('.nav-mobile').on('click','.menu',function(e){
+	e.preventDefault();
+	$('.nav-mobile .background').show(10, function(){
+		$('.nav-mobile .menu-select').slideDown(200);
+	})
+})
+
+$('.nav-mobile').on('click','.cancel',function(e){
+	e.preventDefault();
+	$('.nav-mobile .menu-select').slideUp(200, function(){
+		$('.nav-mobile .background').hide(10);
+	});
+})
+
+</script>

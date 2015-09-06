@@ -1,74 +1,93 @@
-var vAttributeAddRow = function(e,object){
+var vAddField = function(e,object,callback){
 	e.preventDefault();
-	var vAttrFieldGroup = new vAttributeFieldGroup($(object).closest('.attribute-field-group')[0])
-	vAttrFieldGroup.addRow();
+	var fieldGroupName = $(object).attr('vFieldTarget').replace(/\[/g,'\\[').replace(/\]/g,'\\]')
+	var vAttrFieldGroup = new vFieldGroup($('[vFieldGroup=' + fieldGroupName + ']')[0])
+	//$(object).closest('[vFieldGroup=' + fieldGroupName + ']') failed to find
+	vAttrFieldGroup.addField();
+	if (callback && typeof(callback) == "function"){
+		callback();
+	}
 }
 
-var vAttributeRemoveRow = function(e,object){
-	e.preventDefault();
-	var vAttrField = new vAttributeField($(object).closest('.attribute-field')[0])
-	vAttrField.removeSelf();
+var vRemoveField = function(e,object,callback){
+	e.preventDefault();	
+	var fieldName = $(object).attr('vFieldTarget').replace(/\[/g,'\\[').replace(/\]/g,'\\]')
+	var vAttrField = new vField($('[vField=' + fieldName + ']' )[0])
+	vAttrField.remove_this();
+	if (callback && typeof(callback) == "function"){
+		callback();
+	}
 }
 
-var vAttributeFieldGroup = function(html){
+//regex find last number match(/(\d+)(?!.*\d)/)[0]
+
+var vFieldGroup = function(html){
 	this.html = html;
 	this.object = $(html);
-	this.maxIndex = 0;
-
-	this.updateIndex = function(){
-		var self = this;
-		this.object.find('.attribute-field').each(function(index,element){
-			var vAF = new vAttributeField(element);
-			if(self.maxIndex<vAF.index){
-				self.maxIndex = vAF.index;
+	this.fieldName = this.object.attr('vFieldGroup')
+	this.maxIndex = function(){
+		var _this = this;
+		var maxIndex = -1;
+		var findFieldName = this.fieldName.replace(/\[/g,'\\[').replace(/\]/g,'\\]')
+		for(index = 0;index<20;index++){
+			var field = this.object.find('[vField=' + findFieldName + '\\[' + index + '\\]]')[0]
+			if (field){
+				if (maxIndex<index){
+					maxIndex = index;
+				}
 			}
-		})
+		}
+		return maxIndex;
 	}
-	this.addRow = function(){
-		var newIndex = this.maxIndex +1;
-		var vAF = new vAttributeField(this.object.find('.attribute-field')[0])
-		this.object.find('.attribute-field').last().after(vAF.clone(newIndex));
-		this.updateIndex();
+	this.addField = function(){
+		var maxIndex = this.maxIndex();
+		var newIndex = maxIndex +1;
+		var findFieldName = this.fieldName.replace(/\[/g,'\\[').replace(/\]/g,'\\]')
+		var vAF = new vField(this.object.find('[vField=' + findFieldName + '\\[' + 0 + '\\]]')[0])
+		this.object.find('[vField=' + findFieldName + '\\[' + maxIndex + '\\]]').after(vAF.clone(newIndex));
 	}
-	this.updateIndex();
 }
 
-var vAttributeField = function(html){
+var vField = function(html){
 	this.html = html;
 	this.object = $(html);
-	this.index = null;
 	this.idValue = "";
-	this.destroyName = "";
+	this.fieldName= this.object.attr('vField')
+	this.index = parseInt(this.fieldName.match(/(\d+)(?!.*\d)/)[0])
+	this.fieldIDName = this.fieldName.match(/\w+/g).join('_');
 
 	this.init = function(){
-		var self = this;
+		var _this = this;
 		this.object.find('*').each(function(index,element){
 			var name = $(element).attr('name');
 			if(name){
 				var nameAttrs = name.match(/\w+/g);
-				if(!isNaN(nameAttrs[2]) && self.index==null){
-					self.index = parseInt(nameAttrs[2]);
-				}
 				if(nameAttrs[3]=="id"){
-					self.idValue = $(element).attr('value');
-				}
-				if(self.destroyName==""){
-					self.destroyName=nameAttrs[0]+'['+nameAttrs[1]+']['+nameAttrs[2]+'][_destroy]'
+					_this.idValue = $(element).attr('value');
 				}
 			}
 		})
 	}
 	this.clone = function(newIndex){
-		var self = this;
+		var _this = this;
 		var newObject = this.object.clone();
-		newObject.find('*').each(function(index,element){
-			var name = $(element).attr('name');
-			if(name){
-				$(element).attr('name',name.replace('['+self.index+']','['+newIndex+']'))
-			};
+
+		var fieldName = this.fieldName;
+		var newFieldName = this.newFieldName(newIndex);
+		var fieldIDName = this.fieldIDName;
+		var newFieldIDName = this.newFieldIDName(newIndex);
+
+		newObject.find('*').andSelf().each(function(index,element){
+			var list = ['name','vfield','vfieldtarget','vfieldgroup']
+			list.forEach(function(str){
+				var elmAttr = $(element).attr(str);
+				if(elmAttr){
+					$(element).attr(str,elmAttr.replace(fieldName, newFieldName));
+				}
+			})
 			var id = $(element).attr('id');
 			if(id){
-				$(element).attr('id',id.replace('_'+self.index+'_', '_'+newIndex+'_' ) );
+				$(element).attr('id', id.replace(fieldIDName, newFieldIDName) );
 			};
 
 			if ($(element).prop('tagName').toLowerCase() != 'option'){
@@ -80,16 +99,54 @@ var vAttributeField = function(html){
 		})
 		return newObject;
 	}
-	this.removeSelf = function(){
-		if(this.idValue==""){
+
+	this.remove_this = function(){
+		if (this.index == 0){
+			this.object.find('*').andSelf().each(function(index,element){			
+				if ($(element).prop('tagName').toLowerCase() != 'option'){
+					if($(element).attr('value')){
+						$(element).attr('value',"")
+					};
+					$(element).val("");
+				}
+			})
+		}else if (this.idValue==""){
 			this.object.remove();
 		}else{
-			var hiddenInput = $("<input type='hidden' name=" + this.destroyName + " value='1'>")[0]
-				this.object.prepend(hiddenInput);
-			this.object.hide();
+		var hiddenInput = $("<input type='hidden' name=" + this.fieldName + "[_destroy] value='1'>")[0]
+		this.object.prepend(hiddenInput);
+		this.object.hide();
 		}
+	}
+
+	this.newFieldName = function(newIndex){
+		return this.fieldGroupName() + "[" + newIndex + "]";
+	}
+
+	this.newFieldIDName = function(newIndex){
+		var lastIndex = this.fieldIDName.length;
+		for(i=this.fieldIDName.length; i>0;i--){
+			if(this.fieldIDName[i]=='_'){
+				lastIndex = i;
+				break;
+			}			
+		}
+		return this.fieldIDName.substring(0,lastIndex) + "_" + newIndex;
+	}
+
+	this.fieldGroupName = function(){
+		var lastIndex = this.fieldName.length;
+		for(i=this.fieldName.length ; i>0;i--){
+			if(this.fieldName[i]=='['){
+				lastIndex = i;
+				break;
+			}
+		}
+		return this.fieldName.substring(0,lastIndex)
 	}
 
 	this.init();
 }
+
+
 

@@ -1,0 +1,126 @@
+
+
+<% if @deal_record.new_record? %>
+	<% path = deal_records_path %>
+	<% method = :post %>
+	<% title = "新增交易紀錄" %>
+<% else %>
+	<% path = deal_record_path(@deal_record) %>
+	<% method = :patch %>
+	<% title = "編輯 #{@deal_record.date.strf.time('%m月%d日')} 在#{@deal_record.location}的交易紀錄" %>
+<% end %>
+
+
+<div class="deal-record-form-title-amount">
+	<div class="title">
+		<%= title %>		
+	</div>
+	<div class="total-amount">
+		<div class="title"> 總金額 </div>
+		<div class="value"> <%= @deal_record.amount %> </div>
+	</div>				
+</div>
+
+<div class="deal-record-form">
+<%= form_tag path, :method=>method do %>	
+
+	<div class="record-field">
+		<div class="record-field-date-location">
+			<div class="date">
+				<%= select :deal_record, 
+									 :date, 
+									 options_for_select(day_list,0.day.ago) %>			
+			</div>
+			<div class="location">
+				<%= text_field :deal_record, 
+											 :location, 
+											 :value=>@deal_record.location,
+											 :placeholder=>"地點" %>
+			</div>			
+		</div>
+
+		<div class="record-field-description">
+			<div class="title">
+				說明
+			</div>
+			<div class="input">
+				<%= text_field :deal_record, :description, :value=>@deal_record.description %>
+			</div>
+		</div>
+
+	</div>
+
+	<%= render :partial=>"deal_records/deal_items.html", :locals=>{:deal_record=>@deal_record} %>
+
+	<div class="submit">
+		<%= submit_tag "儲存這筆記錄" %>
+	</div>
+
+<% end %>
+</div>
+
+<script>
+
+$('.deal-record-form').on('keydown','input,select,a',function(e){
+	if (e.which==13){
+		e.preventDefault()
+		var focusable = $('.deal-record-form').find('input,a,select,button,textarea').filter(':visible');
+    var next = focusable.eq(focusable.index(this)+1);
+    next.focus();
+	}
+})
+
+$('.deal-record-form').on('change','.deal-item-input-amount',function(e){
+	recountTotalAmount();
+	var amount = $(this).val();
+	var dealItemField = $(this).closest('.deal-item-field')
+	var paymentFields = dealItemField.find('.payment-field')
+	if (paymentFields.length==1){
+		$(paymentFields[0]).find('.payment-input-amount').val(amount);
+	}
+})
+
+$('.deal-record-form').on('submit','form',function(e){
+	$('.deal-record-form').find('.deal-item-field-group .deal-item-field').each(function(index,dealItemField){
+		if (checkDealItemAmount(dealItemField)){
+		}else{
+			alert('交易金額與交易方式的金額不相等，請確認後再送出');
+			e.preventDefault();	
+			return false;
+		}
+	})
+})
+
+function recountTotalAmount(){
+	var total_amount = 0
+	$('.deal-record-form .deal-item-field .deal-item-input-amount').each(function(index,element){
+		if (!isNaN(parseInt($(element).val()))){
+			total_amount += parseInt($(element).val());
+		}
+	})
+	$('.deal-record-form-title-amount .total-amount .value').text(total_amount);
+}
+
+function checkDealItemAmount(dealItemField){
+	var dealItemAmount = parseInt($(dealItemField).find('.deal-item-input-amount').val());
+	var paymentAmount = 0;
+
+	$(dealItemField).find('.payment-input-amount').each(function(index,paymnetInput){
+		var amount = parseInt($(paymnetInput).val());
+		if(!isNaN(amount)){
+			paymentAmount += amount;
+		}
+	})
+
+	if(dealItemAmount!==paymentAmount){
+		$($(dealItemField).find('.payment-input-amount')[0]).focus();
+	}
+
+	return dealItemAmount === paymentAmount
+}
+
+
+
+
+</script>
+

@@ -1,24 +1,445 @@
 
 
-.deal-record-new{
+.deal-record-index{
 
-	.deal-items-attributes{
+	table{
+		font-size: 0.6em;
+		border: 2px solid black;
+		table-layout: fixed;
+		width:98%;
+		margin:0 auto;
+
+		tr{
+			border-bottom: 2px solid black;
+			height: 80px;
+		}
+
+		td:nth-child(1){width:15%;}
+		td:nth-child(2){width:20%;}
+		td:nth-child(3){width:20%;}
+		td:nth-child(4){width:15%;}
+		td:nth-child(5){width:20%;}
+		td:nth-child(6){width:12%;}
+
+		.detail{
+			width: 100%;
+	    height: 100%;
+  	  font-size: 1em;
+		}
+
+	}
+}
+
+.deal-record-show{
+	.back{
+		a{
+			display: block;
+			width: 90%;
+			margin:5px auto;
+			background-color: snow;
+		}
+	}
+
+	.record-field{
+		margin-top:40px;
 
 		table{
+			width:98%;
+			margin: 0 auto;
+			table-layout: fixed;
+			border: 2px solid black;
+
+			tr{
+				border-bottom: 2px solid black;
+			}
+
+			td:nth-child(1){width:30%};
+			td:nth-child(2){width:70%};
+		}	
+	}
+
+	.deal-item-group{
+		margin: 40px 0;
+
+		table{
+			width:98%;
+			border: 2px solid black;
+			margin: 0px auto;
 			table-layout: fixed;
 
-			tr{height: 30px;}
-			td:nth-child(1){width:30%;}
-			td:nth-child(2){width:70%;}
+			tr{
+				border-bottom: 2px solid black;
+			}
+			td:nth-child(1){width:30%};
+			td:nth-child(2){width:70%};			
+		}
+	}
+}
+
+
+
+/* deal-recrod*/
+.deal-record-form-title-amount{
+	padding:20px 2%;
+	height: 100px;
+	width:100%;
+	top:100px;
+	position: fixed;
+	background-color: #aaa;
+
+	.title{
+		float: left;
+		color:white;
+		width: 40%;
+	}
+
+	.total-amount{
+		width:40%;
+		float: right;
+
+		.title{
+			float: left;
+			width:40%;
 		}
 
-		.attribute-field{
-			margin: 20px 0 0 0;
+		.value{
+			float: left;
+			width:60%;
+			background-color: tomato;
+			text-align: center;
+			height: 60px;
+			line-height: 60px;	
+		}
+	}
+
+	.total-amount::after{
+		content: "";
+		display: block;
+		clear:both;			
+	}
+}
+
+.deal-record-form{
+	padding:20px 0 400px 0;
+	background-color: #aaa;
+	margin: 180px 0 0 0;
+
+	.deal-record-form-title-amount::after{
+		content: "";
+		display: block;
+		clear:both;
+	}
+
+	.record-field{
+	   width: 96%;
+	   margin: 0px auto;
+	   padding: 20px 3% 10px  ;
+  	 background-color: #ffefe3;
+
+
+		.record-field-date-location{
+
+			.date{
+				width:40%;
+				float: left;
+
+				select{
+					border-radius: 20px;
+					width: 100%;
+					height: 80px;
+					margin: 0 auto;
+					background-color: lightblue;
+
+				}
+			}
+
+			.location{
+				float: right;
+				width: 50%;
+
+				input[type=text]{
+					border-radius: 20px;
+					width: 100%;
+					height: 80px;
+					margin: 0 auto;
+					background-color: lightblue;
+					text-align: center;
+				}
+			}
+
 		}
 
-		select{
-			border-radius: 0px;	
+		.record-field-date-location::after{
+			content:"";
+			display: block;
+			clear:both;
 		}
+
+
+		.record-field-description{
+			width: 98%;
+			margin: 0px auto;
+			padding: 20px 0;
+
+			.title{
+				font-size: 0.6em;
+				color: #aaa;
+			}
+
+			input[type=text]{
+				border-radius: 20px;
+				width: 100%;
+				height: 80px;
+				margin: 0 auto;
+				background-color: lightblue;
+				text-align: center;
+			}
+
+		}
+	}
+
+	.deal-item-field-group{
+    margin: 20px auto 20px;
+    padding: 0 0 40px;
+    width: 96%;
+	
+		.deal-item-field-group-title{
+			width:100%;
+			padding: 5px 0 0 5px;
+			font-size: 0.8em;
+			color:white;
+		}
+
+		.deal-item-field{
+	    margin: 10px auto;
+	    padding: 20px 0 10px;
+	    background-color: #eeffe3;
+
+			.deal-item-field-remove-amount{
+				width: 98%;
+				margin: 20px auto 5px;
+
+				.remove{
+					width:40%;
+					float: left;
+					padding: 10px 0 0 3%;
+
+					a{
+						color: #fca;
+					}
+				}
+
+				.amount{
+					width:30%;
+					float: right;
+
+					input[type=number]{
+						width:100%;
+						background-color: tomato;
+						border-radius: 20px;
+						text-align: center;
+					}
+				}
+			}
+				
+			.deal-item-field-remove-amount::after{
+				content: "";
+				display: block;
+				clear:both;
+			}
+
+			.deal-item-field-description{
+				width: 90%;
+				margin: 0px auto;
+				padding: 20px 0;
+
+				.title{
+					font-size: 0.6em;
+					color: #aaa;					
+				}
+
+				input[type=text],input[type=number]{
+					border-radius: 20px;
+					width: 100%;
+					height: 80px;
+					margin: 0 auto;
+					background-color: snow;
+					text-align: center;
+				}
+			}
+
+			.deal-item-field-category{
+				width: 98%;
+				margin: 0px auto;
+				padding: 20px 0;
+
+				.first,.second,.third{
+					float: left;
+					width:30%;
+					margin:0 0 0 3%;
+
+					.title{
+						font-size: 0.6em;
+						color: #aaa;					
+					}
+
+					select{
+						border-radius: 20px;
+						width: 100%;
+						height: 80px;
+						margin: 0 auto;
+						background-color: snow;
+					}
+				}
+			}
+
+			.deal-item-field-category::after{
+				content:"";
+				display: block;
+				clear:both;
+			}
+
+
+			.deal-item-field-payment{
+				padding: 20px 0 0 0;
+				
+				.deal-item-field-payment-title{
+					margin: 0 20px 10px;
+					font-size: 0.6em;
+					color: #aaa;										
+				}
+
+				.deal-payment-field-group{
+					width:98%;
+					margin: 0px auto;
+					
+					.payment-field{
+					    margin: 5px;
+					    padding: 15px;
+					    border: solid 2px #cff;
+
+						.remove{
+							width:10%;
+							padding: 6px 0 0 0 ;
+							float: left;
+
+							a{
+								color: #ccf;
+						      font-size: 0.6em;
+							}
+						}
+
+						.account-entity{
+							float: right;
+							width: 50%;
+							margin: 0 3% 0 0;
+
+							select{
+								border-radius: 20px;
+								width: 100%;
+								height: 80px;
+								margin: 0 auto;
+								background-color: snow;
+							}
+						}
+
+						.amount{
+							width: 30%;
+							float: right;
+
+							input[type=text],input[type=number]{
+								border-radius: 20px;
+								height: 80px;
+								width:100%;
+								margin: 0 auto;
+								background-color: #cff;
+								text-align: center;
+							}
+						}
+
+					}
+
+					.payment-field::after{
+						display:block;
+						content:"";
+						clear: both;
+					}
+
+					.add-payment-field{
+						width:50%;
+						padding: 5px 3% 40px 0;
+						text-align: right;
+						float: right;
+
+						a{
+						 display: inline-block;
+						 padding: 20px;
+						 border-radius: 20px;
+						 background-color: #cff;
+						 font-size: 0.6em;					
+						}
+					}
+
+				}
+
+				.deal-payment-field-group::after{
+					display: block;
+					content: "";
+					clear: both;
+
+				}				
+
+			}
+		}
+
+		.add-deal-item-field{
+			padding:20px 4% 0 0;
+		   width: 36%;
+		   float: right;
+
+			a{
+				height: 100px;
+				line-height: 100px;
+				text-align: center;
+				display: block;
+				padding: 0 20px;
+				background-color: #eeffe3;
+				border-radius: 20px;				
+			}
+		}
+
+
+	}
+
+	.deal-item-field-group::after{
+		content: "";
+		display: block;
+		clear:both;
+	}
+
+	.submit{
+		input{
+		 width: 90%;
+	    display: block;
+	    height: 120px;
+	    margin: 0 auto;
+	    background-color: lightgreen;
+	    border-radius: 25px;
+	    border: none;
+	    font-size: 1.5em;
+	    font-family: serif;	    
+		}
+	}
+
+	select{
+		border-radius: 0px;
+		font-size: 1.3em;
+	}
+
+	input[type='text'],
+	input[type='number'],
+	textarea {
+	  font-size: 1.3em;
 	}
 
 }
