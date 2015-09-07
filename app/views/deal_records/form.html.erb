@@ -29,7 +29,7 @@
 			<div class="date">
 				<%= select :deal_record, 
 									 :date, 
-									 options_for_select(day_list,0.day.ago) %>			
+									 options_for_select(day_list, local_date(0)) %>			
 			</div>
 			<div class="location">
 				<%= text_field :deal_record, 

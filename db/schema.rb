@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906152537) do
+ActiveRecord::Schema.define(version: 20150906165810) do
 
   create_table "account_entities", force: :cascade do |t|
     t.string   "name"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 20150906152537) do
   add_index "deal_payments", ["account_entity_id"], name: "index_deal_payments_on_account_entity_id"
   add_index "deal_payments", ["account_owner_id"], name: "index_deal_payments_on_account_owner_id"
   add_index "deal_payments", ["deal_item_id"], name: "index_deal_payments_on_deal_item_id"
+
+  create_table "deal_record_user_updates", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "deal_record_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "deal_record_user_updates", ["deal_record_id"], name: "index_deal_record_user_updates_on_deal_record_id"
+  add_index "deal_record_user_updates", ["user_id"], name: "index_deal_record_user_updates_on_user_id"
 
   create_table "deal_records", force: :cascade do |t|
     t.date     "date"
