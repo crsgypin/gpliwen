@@ -1,8 +1,10 @@
 class DealRecordsController < ApplicationController
+	before_action :check_current_user
 
 	def index
 		@deal_records = DealRecord.includes(:deal_items =>[:first_category, :second_category, :third_category, 
 																				:deal_payments=>[:account_owner,:account_entity=>[:account_owner]]])
+		@deal_records = @deal_records.order(:date=>:desc)
 		@deal_records = @deal_records.page(params[:page]).per(10)
 	end
 
@@ -20,6 +22,7 @@ class DealRecordsController < ApplicationController
 	def create
 		@deal_record = DealRecord.new(deal_record_params)
 		if @deal_record.save
+			@deal_record.deal_record_user_updates.create(:user=>current_user)
 			redirect_to deal_record_path(@deal_record)
 		else
 			render "deal_records/new"
@@ -34,6 +37,7 @@ class DealRecordsController < ApplicationController
 	def update
 		@deal_record = DealRecord.find(params[:id])
 		@deal_record.update!(deal_record_params)
+		@deal_record.deal_record_user_updates.create(:user=>current_user)
 		redirect_to deal_record_path(@deal_record)
 	end
 
@@ -45,5 +49,4 @@ private
 										:deal_items_attributes=>[:id, :amount, :description, :first_category_id,:second_category_id, :third_category_id,
 										:deal_payments_attributes=>[:id, :amount, :account_entity_id, :account_owner_id]])
 	end
-
 end

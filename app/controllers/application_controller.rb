@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
   end
     
   helper_method :mobile_device?
+
+
+  def check_current_user
+  	unless current_user
+  		redirect_to login_path
+  	end
+  end
 end

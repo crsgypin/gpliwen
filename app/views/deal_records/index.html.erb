@@ -20,10 +20,10 @@
 			<td> 交易金額 </td>
 			<td> 交易類別 </td>
 			<td> 交易方式 </td>
-			<td></td>
+			<td> 上次編輯 </td>
 		</tr>
 		<% @deal_records.each_with_index do |deal_record,index| %>
-			<tr>
+			<tr class="deal-record-tr" link=<%=deal_record_path(deal_record)%> >
 				<td> <%= index+1 %> </td>
 				<td> 
 					<%= deal_record.display_date %>
@@ -48,10 +48,27 @@
 					</ul>
 
 				</td>
-				<td> <%= link_to "細節", deal_record_path(deal_record), :class=>"btn btn-default detail"%> </td>
+				<td> 
+					<div>
+						<%= deal_record.deal_record_user_updates.last.user.username if deal_record.deal_record_user_updates.last %>
+					</div>
+					<div>
+						<%= deal_record.deal_record_user_updates.last.created_at.localtime.strftime('%-m/%d') if deal_record.deal_record_user_updates.last %>
+					</div>
+				</td>
 			</tr>
 		<% end %>
 			
 	</table>
 </div>
+
+<script>
+	$('.deal-record-index').on('click','.deal-record-tr',function(e){
+		e.preventDefault();
+		$(this).css({"background-color":"green"})
+		var url = $(this).attr('link');
+		window.location.replace(url);
+	})
+
+</script>
 

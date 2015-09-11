@@ -60,6 +60,23 @@
 		<% end %>
 	</div>
 
+	<div class="edit-history">
+		<div>編輯紀錄</div>
+		<table class="table table-bordered">
+			<tr>
+				<td>編輯者</td>
+				<td>編輯時間</td>
+			</tr>
+			<% @deal_record.deal_record_user_updates.each do |update| %>
+				<tr>
+					<td> <%= update.user.username%></td>
+					<td> <%= update.created_at.localtime %></td>
+				</tr>			
+			<% end %>
+
+		</table>
+	</div>
+
 	<div class="edit">
 			<%= link_to "修改", edit_deal_record_path(@deal_record) %>
 	</div>
