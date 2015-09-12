@@ -1,0 +1,2 @@
+module Setting::AccountEntitiesHelper
+end

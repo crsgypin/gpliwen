@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906165810) do
+ActiveRecord::Schema.define(version: 20150912000443) do
 
   create_table "account_entities", force: :cascade do |t|
     t.string   "name"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20150906165810) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "order"
   end
 
   create_table "second_categories", force: :cascade do |t|
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(version: 20150906165810) do
     t.integer  "first_category_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "order"
   end
 
   add_index "second_categories", ["first_category_id"], name: "index_second_categories_on_first_category_id"
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 20150906165810) do
     t.integer  "second_categories"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "order"
   end
 
   add_index "third_categories", ["second_categories"], name: "index_third_categories_on_second_categories"

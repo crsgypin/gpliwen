@@ -5,6 +5,10 @@
 	width:100%;
 	margin:0;
 
+	.nav-mobile-padding{
+		height: 100px;
+	}
+
 	.nav-mobile{
 		width: 100%;
 		background-color: black;
@@ -51,6 +55,7 @@
 	    padding: 30px;
 	    background-color: white;
 	    border-radius: 20px;
+	    z-index: 100;
 
 			a{
 				display: block;

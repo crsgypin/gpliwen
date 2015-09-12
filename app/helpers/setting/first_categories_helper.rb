@@ -1,0 +1,2 @@
+module Setting::FirstCategoriesHelper
+end
