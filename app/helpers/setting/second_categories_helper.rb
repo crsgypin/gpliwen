@@ -1,2 +1,0 @@
-module Setting::SecondCategoriesHelper
-end

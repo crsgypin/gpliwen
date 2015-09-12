@@ -6,9 +6,9 @@ Rails.application.routes.draw do
 
   namespace :setting do
     get :selections, :to => "selections#index"
-    resources :first_categories
-    resources :second_categories
-    resources :third_categories
+    resources :first_categories do
+      resources :second_categories, :controller=>"first_second_categories"
+    end
     resources :account_entities
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912000443) do
+ActiveRecord::Schema.define(version: 20150912030348) do
 
   create_table "account_entities", force: :cascade do |t|
     t.string   "name"
@@ -101,13 +101,13 @@ ActiveRecord::Schema.define(version: 20150912000443) do
   create_table "third_categories", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "second_categories"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "second_category_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "order"
   end
 
-  add_index "third_categories", ["second_categories"], name: "index_third_categories_on_second_categories"
+  add_index "third_categories", ["second_category_id"], name: "index_third_categories_on_second_category_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
