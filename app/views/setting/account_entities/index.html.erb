@@ -1,0 +1,61 @@
+
+
+<div id="setting-account-entities">
+	<div class="back">
+		<%= link_to "回選單",setting_selections_path %>
+	</div>
+	<table class="table table-bordered">
+		<tr>
+			<td>名稱</td>
+			<td>說明</td>
+			<td>所屬人</td>
+			<td></td>
+		</tr>
+		<% @account_entities.each do |account_entity| %>
+			<tr>
+				<td> <%= account_entity.name %> </td>
+				<td> <%= account_entity.description%> </td>
+				<td> <%= account_entity.account_owner.name %> </td>
+				<td> <%= link_to "編輯",setting_account_entities_path(:edit_id=>account_entity.id) %> </td>
+			</tr>
+		<% end %>
+	</table>
+	
+	<% if @account_entity.new_record? 
+			status = "新增"
+			hash = {:url=>setting_account_entities_path, :method=>:post}
+		 else
+		 	status = "編輯"
+		 	hash = {:url=>setting_account_entity_path(@account_entity), :method=>:patch}
+		 end %>
+
+	<%= form_for @account_entity, hash do |form| %>
+		<div class="field">
+			<%= status  %>
+			<%= link_to "移除",setting_account_entity_path(@account_entity), :method=>:delete, :data=>{:confirm=>"即將移除"} if @account_entity.persisted? && @account_entity.deal_payments.count == 0 %>
+		</div>
+		<div class="field">
+			<%= form.label :name, "名稱" %>
+			<%= form.text_field :name %>			
+		</div>
+
+		<div class="field">
+			<%= form.label :description, "描述" %>
+			<%= form.text_field :description %>
+		</div>
+		
+		<div class="field">
+			<%= form.label :account_owner_id, "所屬人" %>
+			<%= form.select :account_owner_id, options_for_select(@account_owners.map{|ao| [ao.name,ao.id]},@account_entity.account_owner_id) %>
+		</div>
+
+		<div class="field">
+			<%= link_to "取消",setting_account_entities_path %>
+			<%= form.submit "儲存" %>
+		</div>
+	<% end %>
+</div>
+
+
+
+

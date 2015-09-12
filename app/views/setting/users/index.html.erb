@@ -1,0 +1,30 @@
+
+
+<div id="setting-users">
+	<%= form_tag setting_users_path do %>
+		<div class="submit-field">
+			<%= submit_tag "儲存" %>
+			<%= link_to "取消",setting_selections_path %>
+		</div>
+	<% @users.each_with_index do |user,user_index| %>
+			<div class="user-name"> 
+				<%= user.display_name %>
+								
+			</div>
+	
+			<% AccountOwner.all.each_with_index do |account_owner,index| %>
+			<div class="check-field">
+				<%= hidden_field_tag "users[#{user_index}][id]", user.id %>
+				<%= label_tag "users[#{user_index}][account_owner_ids]", account_owner.name %>				
+				<%= check_box_tag "users[#{user_index}][account_owner_ids][]",account_owner.id, user.account_owners.include?(account_owner) %>
+			</div>
+			<% end %>
+			<%= hidden_field_tag "users[#{user_index}][account_owner_ids][]", "" %>
+	<% end %>
+	<% end %>
+	<div class="notice">
+		<%= flash[:notice] %>
+	</div>
+</div>
+
+

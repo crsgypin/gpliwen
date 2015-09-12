@@ -10,6 +10,11 @@ Rails.application.routes.draw do
       resources :second_categories, :controller=>"first_second_categories"
     end
     resources :account_entities
+    resources :users, :only=>[:index] do
+      collection do 
+        post :update
+      end
+    end
   end
 
   root 'deal_records#new'

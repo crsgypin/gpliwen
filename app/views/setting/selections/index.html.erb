@@ -1,11 +1,10 @@
 
 
 <div id="setting-selection">
-	
 	<%= link_to "主項目",setting_first_categories_path %>
 	<%= link_to "次項目",setting_first_category_second_categories_path(FirstCategory.first) %>
 	<%= link_to "帳戶",setting_account_entities_path %>
-
+	<%= link_to "使用者",setting_users_path if current_user&&current_user.admin? %>
 </div>
 
 

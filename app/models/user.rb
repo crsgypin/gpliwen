@@ -5,8 +5,26 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :accounts
+  has_many :account_owner_users
+  has_many :account_owners, :through=>:account_owner_users
+  has_many :account_entities, :through=>:account_owners
+  accepts_nested_attributes_for :account_owner_users, :allow_destroy=>:true
   has_many :deal_recrod_user_updates
+
+  def display_name
+    if self.username.present?
+      return self.username
+    elsif self.name.present?
+      return self.name
+    else
+      return self.email.split("@").first
+    end
+
+  end
+
+  def admin?
+    self.role == "admin"
+  end
 
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid
