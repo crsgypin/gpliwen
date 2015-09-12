@@ -1,67 +1,74 @@
-
+<% if @second_category.new_record?
+		hash = {:url=>setting_first_category_second_categories_path(@first_category), :method=>:post}
+	else
+		hash = {:url=>setting_first_category_second_category_path(@first_category,@second_category), :method=>:patch}
+	end %>
 
 <div id="setting-first-second-category-form">
-	<div class="title">
-		<%= @first_category.name %>
+	<div class="first-category-field">
+		<div class="title"> 主項目 </div>
+		<div class="name"> <%= @first_category.name %> </div>
 	</div>
 	
-	<% if @second_category.new_record?
-			hash = {:url=>setting_first_category_second_categories_path(@first_category), :method=>:post}
-		else
-			hash = {:url=>setting_first_category_second_category_path(@first_category,@second_category), :method=>:patch}
-		end %>
-
 	<%= form_for @second_category, hash  do |form| %>
-
-		<div class="field">
-			<%= form.label :order, "順序" %>
-			<%= form.number_field :order %>
-		</div>
-		<div class="field">
-			<%= form.label :name, "名稱" %>
-			<%= form.text_field :name %>			
-		</div>
-		<div class="field">
-			<%= form.label :description, "描述" %>
-			<%= form.text_field :description %>
-		</div>
-		<div class="field">
+		
+		<div class="second-category-title">
+			次項目
 			<%= link_to "移除",setting_first_category_second_category_path(@first_category,@second_category),:method=>:delete,:data=>{:confirm=>"即將移除"} if @second_category.persisted? && @second_category.deal_items.count ==0 %>
+
 		</div>
-		<div class="third-categories" vFieldGroup="second_category[third_categories_attributes]">
-			<div class="title">
-				小項目
+
+		<div class="second-category-field">
+			<div class="field">
+				<%= form.label :order, "順序" %>
+				<%= form.number_field :order %>
+			</div>
+			<div class="field">
+				<%= form.label :name, "名稱" %>
+				<%= form.text_field :name %>			
+			</div>
+			<div class="field">
+				<%= form.label :description, "描述" %>
+				<%= form.text_field :description %>
 			</div>
 
-			<% @third_categories.each_with_index do |third_category,index| %>
+			<div class="third-category-field-group" vFieldGroup="second_category[third_categories_attributes]">
+				<% @third_categories.each_with_index do |third_category,index| %>
 
-			<div class="field" vField=<%="second_category[third_categories_attributes][#{index}]"%>>
-				<%= link_to "清除","", :onClick=>"vRemoveField(event,this)", 
-															 :vFieldTarget=>"second_category[third_categories_attributes][#{index}]" if third_category.deal_items.count == 0 %>	
-				<%= hidden_field "second_category[third_categories_attributes][#{index}]",:id, :value=>third_category.id %>
-				<div class="field">
-					<%= label_tag "second_category[third_categories_attributes][#{index}][order]", "順序" %>
-					<%= number_field "second_category[third_categories_attributes][#{index}]", :order, :value=>third_category.order %>	
+				<div class="title">
+					小項目			
 				</div>
-				<div class="field">
-					<%= label_tag "second_category[third_categories_attributes][#{index}][name]", "名稱" %>
-					<%= text_field "second_category[third_categories_attributes][#{index}]", :name, :value=>third_category.name %>				
+
+				<div class="content">
+					<div class="third-category-field" vField=<%="second_category[third_categories_attributes][#{index}]"%>>
+						<%= link_to "清除","", :onClick=>"vRemoveField(event,this)", 
+																	 :vFieldTarget=>"second_category[third_categories_attributes][#{index}]" if third_category.deal_items.count == 0 %>	
+						<%= hidden_field "second_category[third_categories_attributes][#{index}]",:id, :value=>third_category.id %>
+						<div class="field">
+							<%= label_tag "second_category[third_categories_attributes][#{index}][order]", "順序" %>
+							<%= number_field "second_category[third_categories_attributes][#{index}]", :order, :value=>third_category.order %>	
+						</div>
+						<div class="field">
+							<%= label_tag "second_category[third_categories_attributes][#{index}][name]", "名稱" %>
+							<%= text_field "second_category[third_categories_attributes][#{index}]", :name, :value=>third_category.name %>				
+						</div>
+						<div class="field">
+							<%= label_tag "second_category[third_categories_attributes][#{index}][description]", "描述" %>
+							<%= text_field "second_category[third_categories_attributes][#{index}]", :description, :value=>third_category.description %>					
+						</div>
+					</div>			
 				</div>
-				<div class="field">
-					<%= label_tag "second_category[third_categories_attributes][#{index}][description]", "描述" %>
-					<%= text_field "second_category[third_categories_attributes][#{index}]", :description, :value=>third_category.description %>					
-				</div>
-				
+				<% end %>
+				<%= link_to "新增小項目","", :onClick=>"vAddField(event,this)", 
+																		 :vFieldTarget=>"second_category[third_categories_attributes]" %>	
+			</div>			
+
+
+			<div class="button">
+				<%= link_to "取消", setting_first_category_second_categories_path(@first_category),:class=>"cancel" %>
+				<%= form.submit "儲存",:class=>"save" %>
 			</div>
-			<% end %>
-			<%= link_to "新增小項目","", :onClick=>"vAddField(event,this)", 
-																	 :vFieldTarget=>"second_category[third_categories_attributes]" %>	
 		</div>
-		<div class="button">
-			<%= link_to "取消", setting_first_category_second_categories_path(@first_category) %>
-			<%= form.submit "儲存" %>
-		</div>
-
 	<% end %>
 
 
