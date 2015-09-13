@@ -1,3 +1,5 @@
+
+
 var vAddField = function(e,object,callback){
 	e.preventDefault();
 	var fieldGroupName = $(object).attr('vFieldTarget').replace(/\[/g,'\\[').replace(/\]/g,'\\]')

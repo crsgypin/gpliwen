@@ -1,0 +1,66 @@
+
+
+#setting-users{
+	background-color:#eee;
+	padding: 40px 5%;
+  height: 100%;
+  min-height: 100vh;
+
+	.submit-field{
+		font-size: 1.2em;
+
+		&::after{
+			display:block;
+			content:"";
+			clear:both;
+		}
+
+		padding:20px 0 40px 0;
+		.cancel{
+			float:left;
+	    margin: 0 100px 0 0;
+	    background-color: #fa3;
+  	  padding: 20px
+		}
+
+		.save{
+			float:right;
+	    background-color: #aff;
+	    padding: 20px 100px;
+	    margin: 0	;
+		}
+	}
+
+	.user-field{
+		font-size:1.5em;
+		padding: 30px 30px 50px 30px;
+    border: solid 2px green;
+    margin: 0 0 40px;
+
+		.user-name{
+			padding:0 0 30px;
+		}
+
+		label{
+			width: 50%;
+		}
+		.check-field{
+			padding: 20px 0 20px;
+
+			input[type=checkbox]{
+				display:none;
+			}
+
+
+
+		}
+
+
+	}
+
+
+
+
+}
+
+

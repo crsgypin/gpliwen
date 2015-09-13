@@ -4,6 +4,19 @@ Rails.application.routes.draw do
   resources :deal_records
   get :login, :to=>"users#sign_in"
 
+  namespace :setting do
+    get :selections, :to => "selections#index"
+    resources :first_categories do
+      resources :second_categories, :controller=>"first_second_categories"
+    end
+    resources :account_entities
+    resources :users, :only=>[:index] do
+      collection do 
+        post :update
+      end
+    end
+  end
+
   root 'deal_records#new'
 
   # The priority is based upon order of creation: first created -> highest priority.

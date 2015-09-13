@@ -1,0 +1,113 @@
+
+#setting-first-categories{
+	padding: 50px 10%;
+	width:100%;
+	height:100vh;
+	background-color:#eee;
+
+	.back{
+		padding: 20px 0 40px 0;
+
+		a{
+			font-size: 1.2em;
+		}
+	}
+
+	.title{
+		margin: 0 0 40px;
+		font-size: 2em;
+	}
+
+	table{
+		text-align: center;
+		margin: 0 0 200px;
+		background-color: #afe;
+		font-size:1.2em;
+
+		td{
+			border: 1px solid black;
+		}
+
+		td:nth-child(1){width:20%;}
+		td:nth-child(2){width:20%;}
+		td:nth-child(3){width:40%;}
+		td:nth-child(4){width:20%;}
+
+		.desc-col, .edit-col{font-size: 0.8em;line-height:2em}
+	}
+
+
+	.new-form{
+		display:none;
+	}
+
+	form{
+		padding: 10px 0 20px;
+		margin: 0 0 80px;
+		border: 2px solid #aaf;
+		font-size: 1.2em;
+
+		.field{
+			padding: 0 5%;
+			margin: 40px 0;
+
+			label{
+				width: 20%;
+			}
+
+			[type="text"],[type="number"]{
+				text-align: center;
+				width:70%;
+				margin-left: 40px;				
+			}
+
+		}
+
+		.button::after{
+			display: block;
+			content: "";
+			clear:both;
+		}
+
+		.button{
+			padding: 20px 5%;
+
+			.submit{
+				float:right;
+				width:40%;
+				background-color: #cff;
+			}
+
+			.cancel{
+				text-align:center;
+				border: 1px solid black;
+				float:left;
+				width:40%;
+				background-color: #cfc;
+			}
+		}
+
+		.remove{
+			display: block;
+			float:right;
+			color: #faa;
+		}
+	}
+
+	.add-new{
+		display: inline-block;
+		padding: 10px 20px;
+		border-radius: 20px;
+		font-size: 1.2em;
+		margin: 0 0 20px;
+		background-color: #afa;
+		a{color: #00f;}
+	}
+
+}
+
+
+
+
+
+

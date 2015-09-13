@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906165810) do
+ActiveRecord::Schema.define(version: 20150912152954) do
 
   create_table "account_entities", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20150906165810) do
   end
 
   add_index "account_entities", ["account_owner_id"], name: "index_account_entities_on_account_owner_id"
+
+  create_table "account_owner_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "account_owner_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "account_owner_users", ["account_owner_id"], name: "index_account_owner_users_on_account_owner_id"
+  add_index "account_owner_users", ["user_id"], name: "index_account_owner_users_on_user_id"
 
   create_table "account_owners", force: :cascade do |t|
     t.string   "name"
@@ -84,6 +94,7 @@ ActiveRecord::Schema.define(version: 20150906165810) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "order"
   end
 
   create_table "second_categories", force: :cascade do |t|
@@ -92,6 +103,7 @@ ActiveRecord::Schema.define(version: 20150906165810) do
     t.integer  "first_category_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "order"
   end
 
   add_index "second_categories", ["first_category_id"], name: "index_second_categories_on_first_category_id"
@@ -99,12 +111,13 @@ ActiveRecord::Schema.define(version: 20150906165810) do
   create_table "third_categories", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "second_categories"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "second_category_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "order"
   end
 
-  add_index "third_categories", ["second_categories"], name: "index_third_categories_on_second_categories"
+  add_index "third_categories", ["second_category_id"], name: "index_third_categories_on_second_category_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -126,6 +139,7 @@ ActiveRecord::Schema.define(version: 20150906165810) do
     t.string   "auth_token"
     t.text     "auth_raw_data"
     t.string   "avatar"
+    t.string   "role"
   end
 
   add_index "users", ["auth_provider"], name: "index_users_on_auth_provider"

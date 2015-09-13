@@ -1,0 +1,2 @@
+module Setting::SelectionsHelper
+end

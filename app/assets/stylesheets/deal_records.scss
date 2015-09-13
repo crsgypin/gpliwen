@@ -1,8 +1,7 @@
 
-$navHeight: 100px;
 
 .deal-record-index{
-	$headerHeight: $navHeight + 100px;
+	$headerHeight: 100px;
 
 	margin: $headerHeight 0 0 0;
 	padding: 0 2%;
@@ -140,7 +139,7 @@ $navHeight: 100px;
 .deal-record-form{
 	padding:20px 0 400px 0;
 	background-color: #aaa;
-	margin: 200px 0 0 0;
+	margin: 100px 0 0 0;
 
 	.deal-record-form-title-amount::after{
 		content: "";

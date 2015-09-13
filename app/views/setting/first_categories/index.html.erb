@@ -1,0 +1,69 @@
+
+<div id="setting-first-categories">
+	<div class="back"> <%= link_to "回主選單", setting_selections_path %></div>	
+	<div class="title">主項目</div>
+	<table class="table table-bordered">
+		<tr>
+			<td>順序</td>
+			<td>名稱</td>
+			<td>描述</td>
+			<% if @first_category.new_record? %>
+				<td></td>
+			<% end %>
+		</tr>
+		<% @first_categories.each do |first_category| %>
+			<tr>
+				<td> <%= first_category.order %></td>
+				<td> <%=first_category.name%> </td>
+				<td class="desc-col"> <%=first_category.description %> </td>
+
+				<% if @first_category.new_record? %>
+					<td class="edit-col"> <%= link_to "編輯", setting_first_categories_path(:edit_id=>first_category.id) %> </td>
+				<% end %>
+			</tr>
+		<% end %>
+	</table>
+
+	<% if @first_category.new_record? %>
+		<div class="add-new"> <%= link_to "新增","" %> </div>
+		<% hash = {:url=>setting_first_categories_path,:method=>:post, :html=>{:class=>"new-form"}} %>
+	<% else %>
+		<% hash = {:url=>setting_first_category_path(@first_category),:method=>:patch} %>
+	<% end %>
+
+	<%= form_for @first_category, hash do |form| %>
+		<div class="field">
+			<%= @first_category.new_record? ? "新增主項目" : "編輯主項目中..." %>
+			<%= link_to "移除", setting_first_category_path(@first_category), :method=>:delete, :data=>{:confirm=>"即將移除"}, :class=>"remove" if @first_category.persisted? && @first_category.deal_items.count == 0 %>
+
+		</div>
+		<div class="field">
+			<%= form.label :order, "順序" %>
+			<%= form.number_field :order %>
+		</div>
+
+		<div class="field">
+			<%= form.label :name, "名稱" %>
+			<%= form.text_field :name %>
+		</div>
+		<div class="field">
+			<%= form.label :description, "描述" %>
+			<%= form.text_field :description %>		
+		</div>
+		<div class="button">
+			<%= link_to "取消",setting_first_categories_path, :class=>"cancel" %>
+			<%= form.submit "儲存", :class=>"submit" %>
+		</div>
+	<% end %>
+</div>
+
+<script>
+	$('.add-new a').on('click',function(e){
+		e.preventDefault();
+		$('.new-form').show(300);
+	})
+
+</script>
+
+
+

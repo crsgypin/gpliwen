@@ -1,0 +1,127 @@
+
+#setting-account-entities{
+	padding: 20px 5% 200px;
+	min-height: 100vh;
+	height: 100%;
+	background-color: #eee;
+
+	.back{
+		padding:20px 20px 20px;
+		margin-bottom: 20px;
+		font-size: 1.3em;
+    background-color: #fa3;
+    display:inline-block;
+	}
+
+	.account-entity-content{
+		margin: 0 0 200px;
+		font-size: 1.1em;
+
+		tr, td {
+			border: solid 2px green;
+			vertical-align: middle;
+		}
+
+		text-align: center;
+		tr:nth-child(1){background-color:#aff}
+		td:nth-child(1){width:30%}
+		td:nth-child(2){width:40%}
+		td:nth-child(3){width:20%}
+		td:nth-child(4){
+			width:10%;
+			font-size: 0.8em;
+		}
+	}
+
+	.acount-entity-form{
+		.form-title{
+			padding: 40px 0 40px 5px;
+			font-size: 1.3em;
+
+			.add-new{
+		    background-color: #faf;
+		    padding: 20px;
+		    color: blue;
+		    border-radius: 30px
+			}
+
+			.edit{
+				float:left;
+			}
+
+			.remove{
+				float:right;
+				margin: 0 20px 0;
+			}
+		}
+
+		.form-title::after{
+			content: "";
+			display: block;
+			clear:both;
+		}
+
+		.new-form{
+			display:none;
+		}
+
+		form{
+			border: solid 2px green;
+			padding: 20px 5%;
+
+			.field {
+				margin: 40px 0;
+
+				label{
+					width: 30%;
+				}
+
+				[type=text]{
+					width: 65%;
+					font-size: 1.3em;
+				}
+
+				select{
+					width: 65%;
+					border-radius: 0px;
+					height: 100px;
+					font-size: 1.3em;
+				}
+			}
+
+			.button-field{
+				padding: 50px 5%;
+
+				.cancel, .save{
+					display: block;
+					margin:0;
+					padding:0;
+					width:45%;
+					text-align:center;
+					height: 100px;
+					line-height: 100px;
+					font-size: 1.3em;
+				}
+				.cancel{
+					float: left;
+					background-color:#ffa;
+				}
+				.save{
+					float: right;
+					background-color:#aff;
+				}
+			}
+
+			.button-field::after{
+				clear:both;
+				content:"";
+				display:block;
+			}	
+		}
+
+	}
+
+}
+
+
+

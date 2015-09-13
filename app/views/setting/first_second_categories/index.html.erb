@@ -1,0 +1,71 @@
+
+
+<div id="setting-first-second-categories">
+	
+	<%= form_tag "", :class=>"first-category-selection-form", :method=>:get do %>
+		<div class="back">
+			<%=link_to "回選單", setting_selections_path %>		
+		</div>
+
+		<div class="first-category-info">
+			<%= select_tag "value", options_for_select(FirstCategory.all.map{|f| [f.name,f.id]},@first_category.id) %>
+			<%= @first_category.description %>			
+		</div>
+	<% end %>
+
+	<div class="second-category-content">
+		<table class="table table-bordered">
+			<tr class="table-heading-row">
+				<td> 
+					<div class="second-category-title">子項目 </div>
+				</td>
+				<td> 
+					小項目 
+				</td>
+				<td>
+					<%= link_to "新增",new_setting_first_category_second_category_path(@first_category), :class=>"add-new"%>					
+				</td>
+			</tr>
+			<% @second_categories.each do |second_category| %>
+				<tr>
+					<td class="second-category-col">
+						<div class="name">
+							<%= second_category.name %> 
+						</div>
+						<div class="description">
+							<%= second_category.description %>
+						</div>
+					</td>
+					<td class="third-category-col">
+						<ul>
+							<% second_category.third_categories.order(:order).each do |third_category| %>
+								<li> 
+									<span class="name"> <%= third_category.name %>  </span>
+									<span class="description"><%= "(#{third_category.description})" if third_category.description.present? %> </span>
+								</li>
+							<% end %>
+						</ul>						
+					</td>
+					<td>
+						<%= link_to "編輯",edit_setting_first_category_second_category_path(@first_category,second_category),:class=>"edit" %>
+					</td>
+				</tr>
+			<% end %>			
+		</table>
+	</div>
+</div>
+
+<script>
+
+$('#setting-first-second-categories .first-category-selection-form').on('change','select',function(e){
+	e.preventDefault();
+	var firstCategoryId = parseInt($(this).val());
+	var url = "/setting/first_categories/" + firstCategoryId + "/second_categories"
+	$('#setting-first-second-categories .first-category-selection-form').attr('action',url);
+	$('#setting-first-second-categories .first-category-selection-form').submit();
+})
+
+</script>
+
+
+
