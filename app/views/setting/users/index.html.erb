@@ -1,30 +1,52 @@
-
+	
 
 <div id="setting-users">
 	<%= form_tag setting_users_path do %>
 		<div class="submit-field">
-			<%= submit_tag "儲存" %>
-			<%= link_to "取消",setting_selections_path %>
+			<%= link_to "回選單",setting_selections_path,:class=>"cancel" %>
+			<%= submit_tag "儲存", :class=>"save" %>
 		</div>
 	<% @users.each_with_index do |user,user_index| %>
+		<div class="user-field">
 			<div class="user-name"> 
 				<%= user.display_name %>
-								
 			</div>
-	
+
 			<% AccountOwner.all.each_with_index do |account_owner,index| %>
 			<div class="check-field">
 				<%= hidden_field_tag "users[#{user_index}][id]", user.id %>
-				<%= label_tag "users[#{user_index}][account_owner_ids]", account_owner.name %>				
-				<%= check_box_tag "users[#{user_index}][account_owner_ids][]",account_owner.id, user.account_owners.include?(account_owner) %>
+				<%= label_tag "users_#{user_index}_account_owner_ids_#{account_owner.id}" do %> 
+					<% if user.account_owners.include?(account_owner) %>
+						<span class="check-result glyphicon glyphicon-check"></span>
+					<% else %>
+						<span class="check-result glyphicon glyphicon-unchecked"></span>
+					<% end %>
+					<span> <%=account_owner.name%></span>
+					<%= check_box_tag "users[#{user_index}][account_owner_ids][]",account_owner.id, user.account_owners.include?(account_owner),:id=>"users_#{user_index}_account_owner_ids_#{account_owner.id}" %>
+				<% end %>
 			</div>
 			<% end %>
-			<%= hidden_field_tag "users[#{user_index}][account_owner_ids][]", "" %>
+			<%= hidden_field_tag "users[#{user_index}][account_owner_ids][]", "" %>			
+		</div>
 	<% end %>
 	<% end %>
 	<div class="notice">
 		<%= flash[:notice] %>
 	</div>
 </div>
+
+<script>
+$('#setting-users').on('change','input[type=checkbox]',function(e){
+	if ($(this).prop('checked')){
+		$(this).parent().find('.check-result').removeClass('glyphicon-unchecked')
+		$(this).parent().find('.check-result').addClass('glyphicon-check')
+	}else{
+		$(this).parent().find('.check-result').removeClass('glyphicon-check')
+		$(this).parent().find('.check-result').addClass('glyphicon-unchecked')
+	}
+})
+
+
+</script>
 
 

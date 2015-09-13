@@ -6,10 +6,12 @@
 	background-color: #eee;
 
 	.back{
-		padding:20px 0 40px;
+		padding:20px 20px 20px;
+		margin-bottom: 20px;
 		font-size: 1.3em;
+    background-color: #fa3;
+    display:inline-block;
 	}
-
 
 	.account-entity-content{
 		margin: 0 0 200px;
@@ -29,11 +31,9 @@
 			width:10%;
 			font-size: 0.8em;
 		}
-
 	}
 
 	.acount-entity-form{
-
 		.form-title{
 			padding: 40px 0 40px 5px;
 			font-size: 1.3em;
